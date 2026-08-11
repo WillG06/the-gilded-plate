@@ -1,0 +1,379 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Pane & Vino design system.
+ * Palette: cream paper, deep wine, ink, gold.
+ * Display: Playfair Display. Body: Jost. Script accent: Italianno.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-wine: var(--wine);
+  --color-wine-deep: var(--wine-deep);
+  --color-gold: var(--gold);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Jost", "Helvetica Neue", sans-serif;
+  --font-script: "Italianno", cursive;
+}
+
+:root {
+  --radius: 0.25rem;
+  --paper: oklch(0.975 0.008 85);
+  --ink: oklch(0.18 0.01 60);
+  --wine: oklch(0.35 0.14 20);
+  --wine-deep: oklch(0.24 0.11 18);
+  --gold: oklch(0.78 0.11 85);
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--ink);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--ink);
+  --primary: var(--wine);
+  --primary-foreground: oklch(0.98 0.01 85);
+  --secondary: oklch(0.94 0.012 85);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.94 0.012 85);
+  --muted-foreground: oklch(0.5 0.015 60);
+  --accent: oklch(0.92 0.02 85);
+  --accent-foreground: var(--wine-deep);
+  --destructive: oklch(0.55 0.2 27);
+  --destructive-foreground: oklch(0.98 0.01 85);
+  --border: oklch(0.88 0.012 80);
+  --input: oklch(0.88 0.012 80);
+  --ring: var(--wine);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+  }
+}
+
+
+/* Film grain overlay (feature 2) */
+.film-grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.04;
+  background-color: transparent;
+  filter: url(#pv-grain);
+  background-image: linear-gradient(transparent, transparent);
+  backdrop-filter: url(#pv-grain);
+}
+
+@utility eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+@utility rule-line {
+  border-top: 1px solid var(--border);
+}
+
+/* Marquee (feature 8) */
+@keyframes pv-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.pv-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: pv-marquee 38s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pv-marquee-track {
+    animation: none;
+  }
+}
+
+/* Sticky story split (feature 5) */
+.sticky-story {
+  display: block;
+}
+
+@media (min-width: 900px) {
+  .sticky-story {
+    display: flex;
+    align-items: flex-start;
+  }
+  .sticky-story__media {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 50%;
+    flex: 0 0 50%;
+    overflow: hidden;
+  }
+  .sticky-story__copy {
+    width: 50%;
+    flex: 0 0 50%;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Premium detailing: framed imagery, ink-pattern dark panels
+   --------------------------------------------------------------- */
+
+/* Designed image frame: hairline rule with an offset gold inner keyline. */
+@utility framed {
+  position: relative;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  background-color: var(--paper);
+}
+
+@utility framed-dark {
+  position: relative;
+  padding: 0.5rem;
+  border: 1px solid color-mix(in oklab, var(--gold) 40%, transparent);
+  background-color: transparent;
+}
+
+.framed > img,
+.framed-dark > img {
+  display: block;
+  width: 100%;
+  outline: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+  outline-offset: -1px;
+}
+
+/* Dark panel: solid wine ground at 65% opacity over a repeating ink motif. */
+.ink-panel {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--wine-deep);
+  background-image: var(--pv-ink-tile);
+  background-repeat: repeat;
+  background-size: 780px 780px;
+}
+
+.ink-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--wine-deep);
+  opacity: 0.65;
+}
+
+.ink-panel > * {
+  position: relative;
+}
+
+/* Traditional menu leader dots between dish name and price. */
+.menu-leader {
+  flex: 1 1 auto;
+  margin: 0 0.75rem;
+  border-bottom: 1px dotted color-mix(in oklab, var(--foreground) 30%, transparent);
+  transform: translateY(-0.3rem);
+}
+
+/* Button system: engraved keyline, gold inner rule, wine sweep on hover. */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 0.9rem 2rem;
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  transition:
+    color 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.btn > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* gold inner keyline */
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  z-index: 1;
+  border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+  opacity: 0;
+  transform: scale(1.05);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+  pointer-events: none;
+}
+
+.btn:hover::after,
+.btn:focus-visible::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* sweep fill */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.btn:hover::before,
+.btn:focus-visible::before {
+  transform: scaleY(1);
+}
+
+.btn--wine {
+  background-color: var(--wine);
+  border-color: var(--wine);
+  color: var(--primary-foreground);
+}
+
+.btn--wine::before {
+  background-color: var(--wine-deep);
+}
+
+.btn--outline {
+  background-color: transparent;
+  border-color: color-mix(in oklab, var(--wine) 55%, transparent);
+  color: var(--wine);
+}
+
+.btn--outline::before {
+  background-color: var(--wine);
+}
+
+.btn--outline:hover,
+.btn--outline:focus-visible {
+  color: var(--primary-foreground);
+  border-color: var(--wine);
+}
+
+.btn--ghost {
+  background-color: transparent;
+  border-color: color-mix(in oklab, currentColor 55%, transparent);
+  color: var(--primary-foreground);
+}
+
+.btn--ghost::before {
+  background-color: var(--primary-foreground);
+}
+
+.btn--ghost:hover,
+.btn--ghost:focus-visible {
+  color: var(--wine-deep);
+  border-color: var(--primary-foreground);
+}
+
+/* Arch variant: Roman portal silhouette instead of a plain box. */
+.btn--arch {
+  border-radius: 999px 999px 2px 2px;
+  padding-top: 1.05rem;
+  padding-bottom: 0.85rem;
+}
+
+.btn--arch::after {
+  border-radius: 999px 999px 1px 1px;
+}
+
+.btn--arch::before {
+  border-radius: 999px 999px 1px 1px;
+}
+
+.btn--arch.btn--sm {
+  padding-top: 0.8rem;
+  padding-bottom: 0.65rem;
+}
+
+.btn--sm {
+  padding: 0.7rem 1.3rem;
+  font-size: 0.63rem;
+  letter-spacing: 0.22em;
+}
+
+
+/* Typing reveal used by the gift voucher icon. */
+.type-reveal {
+  display: inline-block;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 0.5s steps(16, end);
+}
+
+.group:hover .type-reveal,
+.group:focus-visible .type-reveal {
+  max-width: 11rem;
+}
+
+.type-reveal__text {
+  display: inline-block;
+  padding-right: 0.5rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-right: 1px solid currentColor;
+}
