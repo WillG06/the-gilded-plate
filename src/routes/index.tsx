@@ -116,7 +116,7 @@ function Index() {
           "Hardens Guide",
         ]}
       />
-      <InstagramFeed />
+      {/*<InstagramFeed />*/}
       <NewsletterSignup />
     </main>
   );
