@@ -94,9 +94,6 @@
   }
 }
 
-@utility safe-top {
-  padding-top: env(safe-area-inset-top);
-}
 
 /* Film grain overlay (feature 2) */
 .film-grain::after {
@@ -194,6 +191,16 @@
   width: 100%;
   outline: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
   outline-offset: -1px;
+}
+
+/* Gallery strip override: pure white frame instead of the shared gold keyline.
+   Same specificity as the rules above — declared after them, so it wins. */
+.gallery-frame {
+  border-color: #ffffff;
+}
+
+.gallery-frame > img {
+  outline-color: #ffffff;
 }
 
 /* Dark panel: solid wine ground at 65% opacity over a repeating ink motif. */
