@@ -94,6 +94,9 @@
   }
 }
 
+@utility safe-top {
+  padding-top: env(safe-area-inset-top);
+}
 
 /* Film grain overlay (feature 2) */
 .film-grain::after {
