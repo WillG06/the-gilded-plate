@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { assetUrl } from "@/lib/utils";
-const img = assetUrl("/img/dish-tagliatelle.jpg");
+const img = assetUrl("/img/chefOwner.jpg");
 
 const LOCK_AT = 0.65; // fraction down the image where the text locks in place
 

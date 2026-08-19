@@ -1,6 +1,6 @@
 import { assetUrl } from "@/lib/utils";
 
-const focaccia = assetUrl("/img/focaccia.jpg");
+const wall = assetUrl("/img/enhanced.jpg");
 const inkGrapes = assetUrl("/img/ink-grapes.png");
 
 const BLOCKS = [
@@ -28,10 +28,10 @@ export function StickyStory() {
     <div className="sticky-story border-y border-border">
       <div className="sticky-story__media">
         <img
-          src={focaccia}
-          alt="Stacked slices of freshly baked Roman focaccia"
-          width={1000}
-          height={1300}
+          src={wall}
+          alt="Interior of the restaurant"
+          width={400}
+          height={600}
           loading="lazy"
           className="h-[60vh] w-full object-cover md:h-full"
         />

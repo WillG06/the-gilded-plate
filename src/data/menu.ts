@@ -1,9 +1,10 @@
 import { assetUrl } from "@/lib/utils";
 
-const steak = assetUrl("/img/steak.jpg");
+const steak = assetUrl("/img/Steak.jpg");
 const focaccia = assetUrl("/img/focaccia.jpg");  
 const table = assetUrl("/img/tableFood.jpg");
-const wine = assetUrl("/img/hero-wine.jpg");
+const pizza = assetUrl("/img/Pizza.jpg");
+const pizza2 = assetUrl("/img/pizzaSlanted.jpg");
 
 export type DietaryTag =
   | "Vegan"
@@ -35,7 +36,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       description:
         "Slow-fermented for 48 hours, baked at midday, torn at the table with Sicilian olive oil.",
       price: "£6.50",
-      image: focaccia,
+      image: pizza,
       course: "Antipasti",
       tags: ["Vegan"],
     },
@@ -51,7 +52,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Tagliatelle Cacio e Pepe",
       description: "Hand-rolled ribbons, Pecorino Romano, cracked Tellicherry pepper.",
       price: "£14.00",
-      image: steak,
+      image: pizza2,
       course: "Primi",
       tags: ["Vegetarian", "Contains Dairy"],
     },
@@ -67,7 +68,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Panna Cotta al Limone",
       description: "Amalfi lemon, single cream set soft, candied peel.",
       price: "£7.00",
-      image: focaccia,
+      image: pizza,
       course: "Dolci",
       tags: ["Vegetarian", "Contains Dairy", "Gluten-Free"],
     },
@@ -85,7 +86,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Bucatini all'Amatriciana",
       description: "Guanciale rendered slow, San Marzano, a whisper of chilli.",
       price: "£17.00",
-      image: steak,
+      image: pizza2,
       course: "Primi",
       tags: ["Contains Dairy"],
     },
@@ -101,7 +102,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Branzino al Forno",
       description: "Whole sea bass baked with lemon, capers and new season olive oil.",
       price: "£24.00",
-      image: steak,
+      image: pizza,
       course: "Secondi",
       tags: ["Gluten-Free", "Halal"],
     },
@@ -109,7 +110,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Melanzane alla Parmigiana",
       description: "Layered aubergine, slow tomato, Parmigiano crust, baked to order.",
       price: "£16.00",
-      image: focaccia,
+      image: table,
       course: "Secondi",
       tags: ["Vegetarian", "Contains Dairy", "Gluten-Free"],
     },
@@ -117,7 +118,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Tiramisù della Nonna",
       description: "Savoiardi soaked in Bologna espresso, mascarpone whipped to order.",
       price: "£8.00",
-      image: focaccia,
+      image: table,
       course: "Dolci",
       tags: ["Vegetarian", "Contains Dairy"],
     },
@@ -153,7 +154,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Negroni Sbagliato",
       description: "Campari, vermouth rosso, topped with Franciacorta.",
       price: "£10.00",
-      image: wine,
+      image: pizza,
       course: "Cantina",
       tags: ["Vegan", "Gluten-Free"],
     },
@@ -161,7 +162,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Chianti Classico, Riserva",
       description: "Tuscany. Sour cherry, leather, a long dusty finish.",
       price: "£38.00 bottle",
-      image: wine,
+      image: pizza2,
       course: "Cantina",
       tags: ["Vegan"],
     },
@@ -169,7 +170,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Etna Bianco, Carricante",
       description: "Sicily. Volcanic salt, white peach, a cold stone finish.",
       price: "£42.00 bottle",
-      image: wine,
+      image: pizza2,
       course: "Cantina",
       tags: ["Vegan", "Gluten-Free"],
     },

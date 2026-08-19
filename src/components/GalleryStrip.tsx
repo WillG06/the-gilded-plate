@@ -12,17 +12,21 @@ import { assetUrl } from "@/lib/utils";
 const inkGrapes = assetUrl("/img/ink-grapes.png");
 const inkPattern = assetUrl("/img/ink-pattern.png");
 
-const BASE_IMAGES = [
-  { src: assetUrl("/img/interior.jpg"), alt: "The dining room set for the evening", caption: "La sala" },
-  { src: assetUrl("/img/focaccia.jpg"), alt: "Hand-shaped focaccia dough proving", caption: "Fatto a mano" },
-  { src: assetUrl("/img/wineLights.jpg"), alt: "Candlelight caught in a glass of red wine", caption: "La cantina" },
-  { src: assetUrl("/img/Resturant.jpg"), alt: "Wine poured in the cellar", caption: "Il vino" },
-  { src: assetUrl("/img/winePair.jpg"), alt: "A pairing laid out on the stone counter", caption: "Il forno" },
+const GALLERY_IMAGES = [
+  { src: assetUrl("/img/Interior2.jpg"), alt: "Warmly lit dining room with wooden tables, chairs and wine bottles displayed along the walls" },
+  { src: assetUrl("/img/interior3.jpg"), alt: "Restaurant dining area with wooden tables, blue chairs and light wood panelled walls" },
+  { src: assetUrl("/img/interiorWall.jpg"), alt: "Light wood panelled restaurant wall decorated with framed artwork, wine bottles and greenery" },
+  { src: assetUrl("/img/resturant.jpg"), alt: "Cosy restaurant interior with wooden tables, warm pendant lighting and wine displayed on the walls" },
+  { src: assetUrl("/img/winePair.jpg"), alt: "Wine and dining details arranged inside the restaurant" },
+  { src: assetUrl("/img/heroWall.jpg"), alt: "Decorative restaurant wall with wooden shelving, wine bottles, framed pictures and plants" },
+  { src: assetUrl("/img/heroWall2.jpg"), alt: "Warm restaurant interior featuring wooden walls, wine displays and ambient lighting" },
+  { src: assetUrl("/img/wallClose.jpg"), alt: "Close-up of the restaurant's wooden feature wall with wine bottles and decorative details" },
+  { src: assetUrl("/img/wallClose2.jpg"), alt: "Detailed view of the restaurant wall featuring wine bottles, artwork and rustic wooden shelving" },
 ];
 
 // Three copies back to back — the middle copy is where we start, giving
 // room to drag either direction before the loop-reset kicks in.
-const STRIP_IMAGES = [...BASE_IMAGES, ...BASE_IMAGES, ...BASE_IMAGES];
+const STRIP_IMAGES = [...GALLERY_IMAGES, ...GALLERY_IMAGES, ...GALLERY_IMAGES];
 
 // Alternating vertical offsets so the strip hangs unevenly, like a contact sheet.
 const OFFSETS = ["md:mt-0", "md:mt-10", "md:mt-2", "md:mt-12", "md:mt-4"];

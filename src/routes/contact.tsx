@@ -3,7 +3,6 @@ import { ContactForm } from "@/components/ContactForm";
 import { BookingForm } from "@/components/BookingForm";
 import { FindUs } from "@/components/FindUs";
 import { InkPanel } from "@/components/InkPanel";
-import { PrivateDiningDialog } from "@/components/PrivateDiningDialog";
 import { assetUrl } from "@/lib/utils";
 const inkBread = assetUrl("/img/ink-bread.png");
 
@@ -46,15 +45,12 @@ function ContactPage() {
           counter.
         </p>
       </InkPanel>
-        
-      <BookingForm />                                                          {/* Change so the private dining is next to left section not below */}
-      <div className="px-6 pb-16 text-center md:px-16">
-        <PrivateDiningDialog label="Planning something private?" />
-      </div>
-      <div className="rule-line" />
-      
-      <FindUs />
+
+      {/*<BookingForm />*/}
+
       <ContactForm />
+      <div className="rule-line" />
+      <FindUs />
     </main>
   );
 }

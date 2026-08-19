@@ -116,6 +116,7 @@
 import { useState, type FormEvent } from "react";
 import { sendEnquiry } from "@/lib/email.functions";
 import { assetUrl } from "@/lib/utils";
+import { PrivateDiningDialog } from "@/components/PrivateDiningDialog";
 const inkWine = assetUrl("/img/ink-wine.png");
 
 const field =
@@ -160,6 +161,9 @@ export function ContactForm() {
           Allergies, celebrations, press, suppliers or a lost umbrella. One of us reads every
           message and replies within a day.
         </p>
+        <div className="mt-8">
+          <PrivateDiningDialog label="Planning something private?" />
+        </div>
       </div>
 
       <form onSubmit={onSubmit} className="grid gap-10 sm:grid-cols-2">

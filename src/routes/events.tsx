@@ -8,11 +8,15 @@ import { assetUrl } from "@/lib/utils";
 const inkWine = assetUrl("/img/ink-wine.png");
 
 const GALLERY_IMAGES = [
-  { src: assetUrl("/img/interior.jpg"), alt: "The dining room at Pane & Vino, tables set for the evening" },
-  { src: assetUrl("/img/focaccia.jpg"), alt: "Stacked slices of freshly baked Roman focaccia" },
-  { src: assetUrl("/img/wineLights.jpg"), alt: "Wine glasses catching candlelight in the cellar" },
-  { src: assetUrl("/img/Resturant.jpg"), alt: "Red wine poured into a glass in the cellar" },
-  { src: assetUrl("/img/winePair.jpg"), alt: "A wine pairing laid out on the counter" },
+  { src: assetUrl("/img/Interior2.jpg"), alt: "Warmly lit dining room with wooden tables, chairs and wine bottles displayed along the walls" },
+  { src: assetUrl("/img/interior3.jpg"), alt: "Restaurant dining area with wooden tables, blue chairs and light wood panelled walls" },
+  { src: assetUrl("/img/interiorWall.jpg"), alt: "Light wood panelled restaurant wall decorated with framed artwork, wine bottles and greenery" },
+  { src: assetUrl("/img/resturant.jpg"), alt: "Cosy restaurant interior with wooden tables, warm pendant lighting and wine displayed on the walls" },
+  { src: assetUrl("/img/winePair.jpg"), alt: "Wine and dining details arranged inside the restaurant" },
+  { src: assetUrl("/img/heroWall.jpg"), alt: "Decorative restaurant wall with wooden shelving, wine bottles, framed pictures and plants" },
+  { src: assetUrl("/img/heroWall2.jpg"), alt: "Warm restaurant interior featuring wooden walls, wine displays and ambient lighting" },
+  { src: assetUrl("/img/wallClose.jpg"), alt: "Close-up of the restaurant's wooden feature wall with wine bottles and decorative details" },
+  { src: assetUrl("/img/wallClose2.jpg"), alt: "Detailed view of the restaurant wall featuring wine bottles, artwork and rustic wooden shelving" },
 ];
 
 const ROTATIONS = ["-rotate-2", "rotate-1", "-rotate-1", "rotate-2", "-rotate-1"];

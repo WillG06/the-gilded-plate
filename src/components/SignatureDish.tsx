@@ -11,19 +11,19 @@ const pairing = assetUrl("/img/wineParing.jpg");
 const PLATES = [
   {
     src: steak,
-    label: "Cacio e Pepe",
-    alt: "Tagliatelle cacio e pepe twirled on a fork above a dark bowl",
-    note: "Egg pasta rolled at nine, Pecorino aged eight months, pepper toasted to order.",
+    label: "Steak Frites",
+    alt: "A perfectly cooked steak with crispy fries",
+    note: "Premium cut, seasoned and grilled to perfection.",
   },
   {
     src: steak2,
-    label: "Steak",
+    label: "Sirloin Steak",
     alt: "A perfectly cooked steak on a plate",
     note: "Premium cut, seasoned and grilled to perfection.",
   },
   {
     src: table,
-    label: "Table Food",
+    label: "Table Selection",
     alt: "A selection of dishes served on a wooden table",
     note: "A variety of our signature dishes, presented beautifully on a wooden table.",
   },
@@ -45,12 +45,9 @@ export function SignatureDish() {
       <div className="grid gap-12 px-6 py-20 md:grid-cols-2 md:gap-20 md:px-16 md:py-24">
         <div className="order-2 flex flex-col justify-center md:order-1">
           <p className="eyebrow">The Signature</p>
-          <h2 className="mt-4 font-display text-4xl md:text-5xl">Tagliatelle Cacio e Pepe</h2>
+          <h2 className="mt-4 font-display text-4xl md:text-5xl">Steak Frites</h2>
           <p className="mt-8 max-w-prose leading-relaxed text-muted-foreground">
-            Three ingredients, nowhere to hide. Egg pasta rolled thin at nine in the morning,
-            Pecorino Romano aged eight months, and Tellicherry pepper toasted to order. It is
-            emulsified in a copper pan, finished with a ladle of starchy water and nothing else.
-            It has been on the menu since our first service and it is not leaving.
+            A perfectly cooked steak, served with golden, crisp frites and a rich, flavourful sauce. Simple, generous and made for a proper meal — the kind of classic you’ll want to come back for.
           </p>
           <DietaryTags tags={["Vegetarian", "Contains Dairy"]} />
           <a href="/contact" className="btn btn--arch btn--outline mt-10 self-start">
