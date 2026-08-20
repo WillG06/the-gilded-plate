@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { assetUrl } from "@/lib/utils";
-const hero1 = assetUrl("/img/resturant.jpg");
-const hero2 = assetUrl("/img/heroWall2.jpg");
-const hero3 = assetUrl("/img/Interior2.jpg");
-const hero4 = assetUrl("/img/heroWall.jpg");
+const hero1 = assetUrl("/img/hero_1.jpg");
+const hero2 = assetUrl("/img/hero_2.jpg");
+const hero3 = assetUrl("/img/hero_3.jpg");
+const hero4 = assetUrl("/img/hero_4.jpg");
 
 const SLIDES = [
   { src: hero1, alt: "Candlelit long table laid for dinner at Pane & Vino", caption: "La sala" },

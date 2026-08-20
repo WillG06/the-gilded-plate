@@ -1,10 +1,10 @@
 import { assetUrl } from "@/lib/utils";
 
-const steak = assetUrl("/img/Steak.jpg");
-const focaccia = assetUrl("/img/focaccia.jpg");  
-const table = assetUrl("/img/tableFood.jpg");
-const pizza = assetUrl("/img/Pizza.jpg");
-const pizza2 = assetUrl("/img/pizzaSlanted.jpg");
+const GnocchiAlPesto = assetUrl("/img/GnocchiAlPesto.jpg");
+const PappardelleAllOssobuco = assetUrl("/img/PappardelleAllOssobuco.jpg");
+const PastaAlRagu = assetUrl("/img/PastaAlRagu.jpg");
+const TortelliniAllaPanna = assetUrl("/img/TortelliniAllaPanna.jpg");
+const CimbelloneBalanzone = assetUrl("/img/CimbelloneBalanzone.jpg");
 
 export type DietaryTag =
   | "Vegan"
@@ -32,35 +32,39 @@ export const COURSE_ORDER: Course[] = ["Antipasti", "Primi", "Secondi", "Dolci",
 export const MENU: Record<MenuService, MenuItem[]> = {
   Lunch: [
     {
-      name: "Focaccia Romana",
+      name: "Pappardelle all’Ossobuco",
       description:
-        "Slow-fermented for 48 hours, baked at midday, torn at the table with Sicilian olive oil.",
-      price: "£6.50",
-      image: pizza,
-      course: "Antipasti",
-      tags: ["Vegan"],
-    },
-    {
-      name: "Tagliere della Casa",
-      description: "Culatello, finocchiona, aged Parmigiano, mostarda and warm bread.",
+        "Silky hand-cut pappardelle served with slow-braised ossobuco, rich veal jus and fresh herbs.",
       price: "£16.50",
-      image: table,
-      course: "Antipasti",
-      tags: ["Contains Dairy", "Contains Nuts"],
-    },
-    {
-      name: "Tagliatelle Cacio e Pepe",
-      description: "Hand-rolled ribbons, Pecorino Romano, cracked Tellicherry pepper.",
-      price: "£14.00",
-      image: pizza2,
+      image: PappardelleAllOssobuco,
       course: "Primi",
-      tags: ["Vegetarian", "Contains Dairy"],
+      tags: ["Contains Dairy"],
+    },
+
+    {
+      name: "Tortellini alla Panna",
+      description:
+        "Delicate handmade tortellini filled with Parmesan and prosciutto, finished in a silky cream sauce.",
+      price: "£15.50",
+      image: TortelliniAllaPanna,
+      course: "Primi",
+      tags: ["Contains Dairy"],
+    },
+
+    {
+      name: "Pasta al Ragù",
+      description:
+        "Handmade pasta tossed through a slow-cooked Italian ragù of beef, tomato and aromatic herbs.",
+      price: "£14.50",
+      image: PastaAlRagu,
+      course: "Primi",
+      tags: [],
     },
     {
       name: "Insalata di Finocchio",
       description: "Shaved fennel, blood orange, Taggiasca olives, new season oil.",
       price: "£9.00",
-      image: table,
+      image: TortelliniAllaPanna,
       course: "Antipasti",
       tags: ["Vegan", "Gluten-Free"],
     },
@@ -68,41 +72,47 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Panna Cotta al Limone",
       description: "Amalfi lemon, single cream set soft, candied peel.",
       price: "£7.00",
-      image: pizza,
+      image: CimbelloneBalanzone,
       course: "Dolci",
       tags: ["Vegetarian", "Contains Dairy", "Gluten-Free"],
     },
   ],
   Dinner: [
+
     {
-      name: "Burrata e Pomodorini",
-      description: "Puglian burrata, confit datterini, basil oil, grilled sourdough.",
-      price: "£12.00",
-      image: table,
-      course: "Antipasti",
-      tags: ["Vegetarian", "Contains Dairy"],
-    },
-    {
-      name: "Bucatini all'Amatriciana",
-      description: "Guanciale rendered slow, San Marzano, a whisper of chilli.",
-      price: "£17.00",
-      image: pizza2,
+      name: "Tortellini alla Panna",
+      description:
+        "Delicate handmade tortellini filled with Parmesan and prosciutto, finished in a silky cream sauce.",
+      price: "£15.50",
+      image: TortelliniAllaPanna,
       course: "Primi",
       tags: ["Contains Dairy"],
     },
+
     {
-      name: "Tagliatelle Cacio e Pepe",
-      description: "Hand-rolled ribbons, Pecorino Romano, cracked Tellicherry pepper.",
-      price: "£16.00",
-      image: steak,
+      name: "Pappardelle all’Ossobuco",
+      description:
+        "Silky hand-cut pappardelle served with slow-braised ossobuco, rich veal jus and fresh herbs.",
+      price: "£16.50",
+      image: PappardelleAllOssobuco,
       course: "Primi",
-      tags: ["Vegetarian", "Contains Dairy"],
+      tags: ["Contains Dairy"],
+    },
+
+    {
+      name: "Pasta al Ragù",
+      description:
+        "Handmade pasta tossed through a slow-cooked Italian ragù of beef, tomato and aromatic herbs.",
+      price: "£14.50",
+      image: PastaAlRagu,
+      course: "Primi",
+      tags: [],
     },
     {
       name: "Branzino al Forno",
       description: "Whole sea bass baked with lemon, capers and new season olive oil.",
       price: "£24.00",
-      image: pizza,
+      image: TortelliniAllaPanna,
       course: "Secondi",
       tags: ["Gluten-Free", "Halal"],
     },
@@ -110,7 +120,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Melanzane alla Parmigiana",
       description: "Layered aubergine, slow tomato, Parmigiano crust, baked to order.",
       price: "£16.00",
-      image: table,
+      image: CimbelloneBalanzone,
       course: "Secondi",
       tags: ["Vegetarian", "Contains Dairy", "Gluten-Free"],
     },
@@ -118,7 +128,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Tiramisù della Nonna",
       description: "Savoiardi soaked in Bologna espresso, mascarpone whipped to order.",
       price: "£8.00",
-      image: table,
+      image: CimbelloneBalanzone,
       course: "Dolci",
       tags: ["Vegetarian", "Contains Dairy"],
     },
@@ -128,7 +138,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Uova in Purgatorio",
       description: "Eggs baked in spiced tomato with focaccia soldiers.",
       price: "£11.50",
-      image: focaccia,
+      image: PappardelleAllOssobuco,
       course: "Primi",
       tags: ["Vegetarian"],
     },
@@ -136,7 +146,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Cornetto & Caffè",
       description: "Butter cornetto, apricot jam, double espresso.",
       price: "£5.50",
-      image: table,
+      image: CimbelloneBalanzone,
       course: "Dolci",
       tags: ["Vegetarian", "Contains Dairy"],
     },
@@ -144,7 +154,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Bruschetta Estiva",
       description: "Grilled bread, marinated tomato, oregano, garlic rubbed thin.",
       price: "£7.50",
-      image: focaccia,
+      image: PappardelleAllOssobuco,
       course: "Antipasti",
       tags: ["Vegan"],
     },
@@ -154,7 +164,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Negroni Sbagliato",
       description: "Campari, vermouth rosso, topped with Franciacorta.",
       price: "£10.00",
-      image: pizza,
+      image: GnocchiAlPesto,
       course: "Cantina",
       tags: ["Vegan", "Gluten-Free"],
     },
@@ -162,7 +172,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Chianti Classico, Riserva",
       description: "Tuscany. Sour cherry, leather, a long dusty finish.",
       price: "£38.00 bottle",
-      image: pizza2,
+      image: PastaAlRagu,
       course: "Cantina",
       tags: ["Vegan"],
     },
@@ -170,7 +180,7 @@ export const MENU: Record<MenuService, MenuItem[]> = {
       name: "Etna Bianco, Carricante",
       description: "Sicily. Volcanic salt, white peach, a cold stone finish.",
       price: "£42.00 bottle",
-      image: pizza2,
+      image: TortelliniAllaPanna,
       course: "Cantina",
       tags: ["Vegan", "Gluten-Free"],
     },

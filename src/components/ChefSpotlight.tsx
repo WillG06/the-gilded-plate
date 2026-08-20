@@ -60,20 +60,17 @@ export function ChefSpotlight() {
       <div>
         <div className="flex flex-col md:sticky" style={{ top: stickyTop }}>
           <p className="eyebrow">Chef Spotlight</p>
-          <h2 className="mt-4 font-display text-5xl">Matteo Rossi</h2>
+          <h2 className="mt-4 font-display text-5xl">Shawky</h2>
           <p className="mt-2 text-sm tracking-[0.2em] uppercase text-muted-foreground">
-            Head Chef &amp; Co-founder
+            Head Chef &amp; Founder
           </p>
           <p className="mt-8 max-w-prose leading-relaxed text-muted-foreground">
-            Matteo grew up in Veneto, where Sunday started with flour on the table and ended with
-            the last bottle emptied. He trained with Gabriele Bonci and Gianluca Fonsato before
-            spending five years in Birmingham's finest kitchens. His dough ferments for forty-eight
-            hours because that is how long it takes. He still rolls every ribbon of tagliatelle by
-            hand, before service, every single day.
+            Shawky has worked as a food preparer his whole life in Italy, including five years as
+            Pavarotti's personal chef, starting in 1991. In 2015 he left Bologna to pursue a
+            dream of opening a restaurant in England — first in Ladywood, then Erdington, then
+            the City Centre, and now back home at Pane &amp; Vino. Wherever he's cooked, one thing
+            has stayed the same: homemade, genuine Italian food, made fresh every day.
           </p>
-          <blockquote className="mt-10 border-l-2 border-wine pl-6 font-display text-2xl leading-snug">
-            "If my grandmother wouldn't send it out of her kitchen, it doesn't leave mine."
-          </blockquote>
         </div>
       </div>
     </motion.section>

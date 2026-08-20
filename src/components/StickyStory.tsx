@@ -5,20 +5,20 @@ const inkGrapes = assetUrl("/img/ink-grapes.png");
 
 const BLOCKS = [
   {
-    title: "1991, Bologna",
-    body: "Our story begins with chef Shawky, who has prepared food his whole life in Italy, including a year as Pavarotti's personal chef.",
+    title: "1991, Italy",
+    body: "Our story begins with chef Shawky, who spent his whole life preparing food in Italy — including five years as Pavarotti's personal chef, starting in 1991.",
   },
   {
-    title: "2015, Birmingham",
-    body: "Shawky left Bologna to chase a restaurant of his own in England. There he met Matteo, a young chef from Veneto trained under Gabriele Bonci and Gianluca Fonsato.",
+    title: "2015, Bologna to Birmingham",
+    body: "In 2015, Shawky left Bologna to chase a dream: opening a restaurant of his own in England.",
   },
   {
-    title: "2023, Erdington",
-    body: "After seven years running his own place downtown, Shawky sold up. Together the two friends opened Pane & Vino — old-school method, new-school craft.",
+    title: "Ladywood to Erdington",
+    body: "Since then he's always run his own kitchens — starting in Ladywood, then Erdington, then a spell in the City Centre — before bringing it all home to Pane & Vino.",
   },
   {
     title: "Today",
-    body: "The beginning of a new story, which we hope you'll be part of. Everything is made in house, every morning, by hand.",
+    body: "One thing has followed him the whole way: a passion for honest, homemade Italian food. Fresh pasta, bakery and desserts, made the same way every single day.",
   },
 ];
 

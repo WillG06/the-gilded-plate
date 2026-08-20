@@ -14,19 +14,61 @@ const inkGrapes = assetUrl("/img/ink-grapes.png");
 const inkPattern = assetUrl("/img/ink-pattern.png");
 
 const GALLERY_IMAGES = [
-
-  { src: assetUrl("/img/frontGlasses.jpg"), alt: "Close-up of the restaurant's wooden feature wall with wine bottles and decorative details" },
-  { src: assetUrl("/img/sideBarTables.jpg"), alt: "Close-up of the restaurant's wooden feature wall with wine bottles and decorative details" },
-  { src: assetUrl("/img/welllit.jpg"), alt: "Detailed view of the restaurant wall featuring wine bottles, artwork and rustic wooden shelving" },
-  { src: assetUrl("/img/hero_1.jpg"), alt: "Warmly lit dining room with wooden tables, chairs and wine bottles displayed along the walls" },
-  { src: assetUrl("/img/hero_2.jpg"), alt: "Restaurant dining area with wooden tables, blue chairs and light wood panelled walls" },
-  { src: assetUrl("/img/hero_3.jpg"), alt: "Light wood panelled restaurant wall decorated with framed artwork, wine bottles and greenery" },
-  { src: assetUrl("/img/hero_4.jpg"), alt: "Cosy restaurant interior with wooden tables, warm pendant lighting and wine displayed on the walls" },
-  { src: assetUrl("/img/heroWall2.jpg"), alt: "Warm restaurant interior featuring wooden walls, wine displays and ambient lighting" },
-  { src: assetUrl("/img/wallClose.jpg"), alt: "Close-up of the restaurant's wooden feature wall with wine bottles and decorative details" },
-  { src: assetUrl("/img/wallClose2.jpg"), alt: "Detailed view of the restaurant wall featuring wine bottles, artwork and rustic wooden shelving" },
-
-
+  {
+    src: assetUrl("/img/GnocchiAlPesto.jpg"),
+    alt: "Gnocchi al Pesto, potato dumplings tossed in fresh basil pesto",
+    caption: "Gnocchi al Pesto",
+  },
+  {
+    src: assetUrl("/img/PappardelleAllOssobuco.jpg"),
+    alt: "Pappardelle all'Ossobuco, wide ribbon pasta with slow-braised ossobuco",
+    caption: "Pappardelle all'Ossobuco",
+  },
+  {
+    src: assetUrl("/img/PastaAlRagu.jpg"),
+    alt: "Pasta al Ragù, pasta in a slow-cooked meat sauce",
+    caption: "Pasta al Ragù",
+  },
+  {
+    src: assetUrl("/img/TortelliniAllaPanna.jpg"),
+    alt: "Tortellini alla Panna, filled pasta in a creamy sauce",
+    caption: "Tortellini alla Panna",
+  },
+  {
+    src: assetUrl("/img/CimbelloneBalanzone.jpg"),
+    alt: "Cimbellone Balanzone, toasted bun topped with ham, burrata and pistachio pesto",
+    caption: "Cimbellone Balanzone",
+  },
+  {
+    src: assetUrl("/img/menu1.jpg"),
+    alt: "Dish from the Pane & Vino menu",
+    caption: "",
+  },
+  {
+    src: assetUrl("/img/menu2.jpg"),
+    alt: "Dish from the Pane & Vino menu",
+    caption: "",
+  },
+  {
+    src: assetUrl("/img/menu3.jpg"),
+    alt: "Dish from the Pane & Vino menu",
+    caption: "",
+  },
+  {
+    src: assetUrl("/img/menu4.jpg"),
+    alt: "Dish from the Pane & Vino menu",
+    caption: "",
+  },
+  {
+    src: assetUrl("/img/menu5.jpg"),
+    alt: "Dish from the Pane & Vino menu",
+    caption: "",
+  },
+  {
+    src: assetUrl("/img/menu6.jpg"),
+    alt: "Dish from the Pane & Vino menu",
+    caption: "",
+  },
 ];
 
 // Three copies back to back — the middle copy is where we start, giving
@@ -138,7 +180,7 @@ function useInfiniteDragScroll() {
   };
 }
 
-export function GalleryStrip() {
+export function FoodGalleryStrip() {
   const drag = useInfiniteDragScroll();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
