@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
-import { Facebook, Gift, Instagram, Menu as MenuIcon, Twitter, X } from "lucide-react";
+import { Facebook, Instagram, Menu as MenuIcon, Phone, Twitter, X } from "lucide-react";
 import { SITE } from "@/data/site";
 import { PrivateDiningDialog } from "@/components/PrivateDiningDialog";
 
@@ -13,7 +13,7 @@ const LINKS = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
-const NAV_HEIGHT = 64; // px — keep header row and mobile panel offset in sync
+const NAV_HEIGHT = 64; // px — keep the mobile header row and panel offset in sync
 
 const listVariants: Variants = {
   open: { transition: { staggerChildren: 0.06, delayChildren: 0.22 } },
@@ -59,6 +59,9 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mouseY, setMouseY] = useState(0);
+  const [atPageEnd, setAtPageEnd] = useState(false);
+  const [viewportHeight, setViewportHeight] = useState(0);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const overHero = pathname === "/";
 
@@ -66,12 +69,27 @@ export function SiteNav() {
   // the mobile menu isn't open — opening the menu always forces the solid style.
   const floating = overHero && !scrolled && !open;
   const solid = scrolled || open;
+  const headerNearCursor = mouseY <= 96;
+  const cursorInTopThirtyPercent = viewportHeight > 0 && mouseY <= viewportHeight * 0.3;
+  const headerHidden = scrolled && !cursorInTopThirtyPercent && !headerNearCursor && !atPageEnd && !open;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
+      setAtPageEnd(window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8);
+    };
+    const onResize = () => setViewportHeight(window.innerHeight);
+    const onMouseMove = (event: MouseEvent) => setMouseY(event.clientY);
+    onResize();
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onResize, { passive: true });
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("mousemove", onMouseMove);
+    };
   }, []);
 
   // Lock body scroll while the takeover is open
@@ -92,7 +110,11 @@ export function SiteNav() {
   return (
     <>
       <header
-        className={`${overHero ? "fixed" : "sticky"} top-0 right-0 left-0 z-50 border-b pt-[env(safe-area-inset-top)] transition-[background-color,border-color,color,backdrop-filter] duration-500 ${
+        className={`${overHero ? "fixed" : "sticky"} top-0 right-0 left-0 z-50 border-b pt-[env(safe-area-inset-top)] transition-transform duration-[1200ms] ease-in-out will-change-transform ${
+          headerHidden
+            ? "lg:pointer-events-none lg:-translate-y-full"
+            : "translate-y-0"
+        } ${
           floating
             ? "border-transparent bg-transparent text-primary-foreground"
             : solid
@@ -102,35 +124,35 @@ export function SiteNav() {
       >
         <nav
           aria-label="Primary"
-          style={{ minHeight: NAV_HEIGHT }}
-          className="relative z-[60] mx-auto grid max-w-[1600px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 md:px-10"
+          className="relative z-[60] mx-auto grid min-h-16 max-w-[1600px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 md:px-10 lg:min-h-[72px]"
         >
-          <div className="flex min-w-0 items-center gap-8">
+          <div className="flex min-w-0 items-center gap-8 justify-self-start">
             <Link to="/" className="font-display text-lg tracking-[0.22em] uppercase">
               Pane &amp; Vino
             </Link>
-            <ul className="hidden items-center gap-7 lg:flex">
-              {LINKS.map((l) => (
-                <li key={l.to}>
-                  <Link
-                    to={l.to}
-                    className={`text-xs tracking-[0.2em] uppercase transition-colors ${floating ? "text-primary-foreground/75 hover:text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <PrivateDiningDialog
-                  variant="bare"
-                  className={`!text-xs !tracking-[0.2em] !no-underline ${floating ? "text-primary-foreground/75 hover:text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
-                  label="Private dining"
-                />
-              </li>
-            </ul>
           </div>
 
-          <div className="flex shrink-0 items-center gap-2">
+          <ul className="hidden items-center gap-7 justify-self-center lg:flex">
+            {LINKS.map((l) => (
+              <li key={l.to}>
+                <Link
+                  to={l.to}
+                  className={`text-xs tracking-[0.2em] uppercase transition-colors ${floating ? "text-primary-foreground/75 hover:text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <PrivateDiningDialog
+                variant="bare"
+                className={`!text-xs !tracking-[0.2em] !no-underline ${floating ? "text-primary-foreground/75 hover:text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                label="Private dining"
+              />
+            </li>
+          </ul>
+
+          <div className="flex shrink-0 items-center gap-2 justify-self-end">
             <Link
               to="/contact"
               className={`btn btn--arch btn--sm hidden sm:inline-flex ${floating ? "btn--ghost" : "btn--wine"}`}
@@ -139,15 +161,14 @@ export function SiteNav() {
             </Link>
 
             <a
-              href={SITE.giftVouchers}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Gift vouchers"
+              href={`tel:${SITE.phone.replace(/\s/g, "")}`}
+              aria-label={`Contact us at ${SITE.phone}`}
               className={`group hidden flex-row-reverse items-center gap-0 px-2 py-2 transition-colors sm:inline-flex ${floating ? "text-primary-foreground/75 hover:text-primary-foreground" : "text-muted-foreground hover:text-wine"}`}
             >
-              <Gift aria-hidden className="h-[18px] w-[18px] shrink-0" />
+              <Phone aria-hidden className="h-[18px] w-[18px] shrink-0" />
               <span className="type-reveal">
-                <span className="type-reveal__text">Gift&nbsp;vouchers</span>
+                <span className="type-reveal__text">Contact&nbsp;Us</span>
+                <span className="type-reveal__number">{SITE.phone}</span>
               </span>
             </a>
 
@@ -272,12 +293,10 @@ export function SiteNav() {
                     <span>Book a table</span>
                   </Link>
                   <a
-                    href={SITE.giftVouchers}
-                    target="_blank"
-                    rel="noreferrer"
+                    href={`tel:${SITE.phone.replace(/\s/g, "")}`}
                     className="inline-flex items-center justify-center gap-2 text-xs tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-wine"
                   >
-                    <Gift aria-hidden className="h-4 w-4" /> Gift vouchers
+                    <Phone aria-hidden className="h-4 w-4" /> Contact Us&nbsp; {SITE.phone}
                   </a>
                 </motion.div>
               </div>

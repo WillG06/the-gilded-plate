@@ -29,8 +29,8 @@ const INTERVAL = 6000;
  */
 const PANEL_MARGIN_X = 0.06;
 
-const TITLE_PANEL_TOP_Y = 0.3;
-const TITLE_PANEL_BOTTOM_Y = 0.62;
+const TITLE_PANEL_TOP_Y = 0.24;
+const TITLE_PANEL_BOTTOM_Y = 0.56;
 const TITLE_PANEL_CORNER_X = 0.035; // tighter corners than before
 const TITLE_PANEL_CORNER_Y = 0.05;
 
@@ -39,23 +39,32 @@ const SLIDER_PANEL_BOTTOM_Y = 0.935; // thinner strip (was 0.85–0.94)
 const SLIDER_PANEL_CORNER_X = 0.015;
 const SLIDER_PANEL_CORNER_Y = 0.012;
 
-const TOP_BLUR_PX = 1; // light blur over everything outside the two panels
-const PANEL_BLUR_PX = 8; // heavy blur inside both panels
+const TOP_BLUR_PX = 1.1; // light blur over everything outside the two panels
+const PANEL_BLUR_PX = 8.8; // heavy blur inside both panels
 
 const left = PANEL_MARGIN_X;
 const right = 1 - PANEL_MARGIN_X;
 
-/** Builds a rounded rectangle path. */
-function roundedRectPath(l: number, t: number, r: number, b: number, cx: number, cy: number) {
+/** Builds a rectangle path with independent top and bottom corner radii. */
+function roundedRectPath(
+  l: number,
+  t: number,
+  r: number,
+  b: number,
+  topCx: number,
+  topCy: number,
+  bottomCx: number,
+  bottomCy: number,
+) {
   return (
-    `M${l},${t + cy} ` +
-    `Q${l},${t} ${l + cx},${t} ` +
-    `L${r - cx},${t} ` +
-    `Q${r},${t} ${r},${t + cy} ` +
-    `L${r},${b - cy} ` +
-    `Q${r},${b} ${r - cx},${b} ` +
-    `L${l + cx},${b} ` +
-    `Q${l},${b} ${l},${b - cy} ` +
+    `M${l},${t + topCy} ` +
+    `Q${l},${t} ${l + topCx},${t} ` +
+    `L${r - topCx},${t} ` +
+    `Q${r},${t} ${r},${t + topCy} ` +
+    `L${r},${b - bottomCy} ` +
+    `Q${r},${b} ${r - bottomCx},${b} ` +
+    `L${l + bottomCx},${b} ` +
+    `Q${l},${b} ${l},${b - bottomCy} ` +
     `Z`
   );
 }
@@ -66,7 +75,9 @@ const TITLE_PANEL_PATH = roundedRectPath(
   right,
   TITLE_PANEL_BOTTOM_Y,
   TITLE_PANEL_CORNER_X,
-  TITLE_PANEL_CORNER_Y
+  TITLE_PANEL_CORNER_Y,
+  0,
+  0,
 );
 
 const SLIDER_PANEL_PATH = roundedRectPath(
@@ -74,8 +85,10 @@ const SLIDER_PANEL_PATH = roundedRectPath(
   SLIDER_PANEL_TOP_Y,
   right,
   SLIDER_PANEL_BOTTOM_Y,
+  0,
+  0,
   SLIDER_PANEL_CORNER_X,
-  SLIDER_PANEL_CORNER_Y
+  SLIDER_PANEL_CORNER_Y,
 );
 
 /** Union of both panels — the heavy-blur region. */
@@ -170,6 +183,61 @@ export function Hero() {
           }}
         />
       </motion.div>
+
+      <div
+        className="absolute z-10 overflow-hidden border border-primary-foreground/45 bg-black/20 p-1 shadow-lg md:hidden"
+        style={{
+          top: "58%",
+          left: "50%",
+          width: "88vw",
+          height: "27%",
+          transform: "translateX(-50%)",
+        }}
+      >
+        <AnimatePresence initial={false} mode="sync">
+          <motion.img
+            key={`preview-${slide.src}`}
+            src={slide.src}
+            alt=""
+            aria-hidden
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="h-full w-full object-cover"
+          />
+        </AnimatePresence>
+      </div>
+
+      <div
+        className="absolute top-[70%] left-1/2 z-10 hidden h-[16%] w-[min(82vw,1000px)] -translate-x-1/2 gap-2 md:flex"
+      >
+        {SLIDES.map((s, i) => (
+          <button
+            key={`preview-${s.src}`}
+            type="button"
+            aria-label={`Show ${s.caption}`}
+            aria-current={i === index}
+            onClick={() => setIndex(i)}
+            className={`group min-w-0 overflow-hidden bg-black/20 p-1 transition-[border-color,flex] duration-500 ${
+              i === index
+                ? "flex-[1.2] border-2 border-neutral-700/90"
+                : "flex-1 border border-primary-foreground"
+            }`}
+          >
+            <img
+              src={s.src}
+              alt=""
+              aria-hidden
+              className={`h-full w-full object-cover transition-[filter,transform] duration-500 ${
+                i === index
+                  ? "blur-0"
+                  : "blur-[1.5px] group-hover:blur-0"
+              }`}
+            />
+          </button>
+        ))}
+      </div>
 
       {/* Title block — pinned to the title panel's bounds, content vertically centered within it */}
       <motion.div

@@ -46,7 +46,7 @@ export function NewsletterSignup() {
         Menu changes, wine finds and first refusal on event tables. One email a month.
       </p>
 
-      <form onSubmit={onSubmit} className="mx-auto mt-8 flex max-w-md gap-2">
+      <form onSubmit={onSubmit} className="mx-auto mt-8 flex max-w-lg gap-2">
         <label htmlFor="newsletter-email" className="sr-only">
           Email address
         </label>
@@ -57,12 +57,12 @@ export function NewsletterSignup() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
-          className="min-w-0 flex-1 border border-input bg-card px-4 py-3 text-sm"
+          className="h-12 min-w-0 flex-1 cursor-text border border-input bg-card px-4 text-sm"
         />
         <button
           type="submit"
           disabled={status === "sending"}
-          className="shrink-0 border border-wine bg-wine px-5 py-3 text-[0.68rem] tracking-[0.2em] uppercase text-primary-foreground"
+          className="h-12 shrink-0 cursor-pointer border border-wine bg-wine px-5 text-[0.68rem] tracking-[0.2em] uppercase text-primary-foreground"
         >
           {status === "sending" ? "…" : "Join"}
         </button>

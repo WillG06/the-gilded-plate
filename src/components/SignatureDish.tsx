@@ -23,20 +23,22 @@ export function SignatureDish() {
           </Link>
         </div>
 
-        <div className="order-1 self-center md:order-2">
+        <div className="order-1 self-center md:-translate-y-8 md:order-2">
           <div className="framed">
-            <motion.img
-              src={cimbellone}
-              alt="Cimbellone Balanzone, a toasted bun topped with ham, burrata and pistachio pesto"
-              width={1200}
-              height={1200}
-              loading="lazy"
-              initial={{ opacity: 0, scale: 1.03 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="aspect-[4/3] w-full object-cover object-[center_78%]"
-            />
+            <div className="overflow-hidden">
+              <motion.img
+                src={cimbellone}
+                alt="Cimbellone Balanzone, a toasted bun topped with ham, burrata and pistachio pesto"
+                width={1200}
+                height={1200}
+                loading="lazy"
+                initial={{ opacity: 0, scale: 1.09 }}
+                whileInView={{ opacity: 1, scale: 1.05 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="aspect-[4/3] w-full object-cover object-[center_82%]"
+              />
+            </div>
           </div>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
             A toasted bun topped with cured ham, burrata and a vivid pistachio pesto.

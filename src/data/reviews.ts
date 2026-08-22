@@ -4,6 +4,9 @@ export interface Review {
   text: string;
 }
 
+export const GOOGLE_RATING = 4.7;
+export const GOOGLE_REVIEW_COUNT = 310;
+
 export const REVIEWS: Review[] = [
   {
     name: "Robyn",

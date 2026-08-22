@@ -117,11 +117,12 @@ function Index() {
 
       <MarqueeStrip
         items={[
-          "Timeout Birmingham",
-          "4.9 on Google",
-          "Best New Restaurant 2025",
-          "Sunday Times Food",
-          "Hardens Guide",
+          "Handmade pasta",
+          "Fresh focaccia",
+          "Italian wine",
+          "Family-owned kitchen",
+          "Erdington, Birmingham",
+          "Lunch and dinner",
         ]}
       />
       {/*<InstagramFeed />*/}

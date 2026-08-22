@@ -4,12 +4,12 @@ interface MarqueeStripProps {
 }
 
 const DEFAULT_ITEMS = [
-  "Timeout Birmingham",
-  "4.9 Stars",
-  "Best New Restaurant 2025",
-  "Sunday Times Food",
-  "Hardens Guide",
-  "Squaremeal Selected",
+  "Handmade pasta",
+  "Fresh focaccia",
+  "Italian wine",
+  "Family-owned kitchen",
+  "Erdington, Birmingham",
+  "Lunch and dinner",
 ];
 
 /** CSS-only looping press strip (features 8 + 16). */
@@ -22,7 +22,7 @@ export function MarqueeStrip({ items = DEFAULT_ITEMS, tone = "dark" }: MarqueeSt
           ? "overflow-hidden border-y border-wine-deep bg-wine-deep py-4 text-primary-foreground"
           : "overflow-hidden border-y border-border bg-secondary py-4 text-foreground"
       }
-      aria-label="Press and awards"
+      aria-label="Pane & Vino details"
     >
       <div className="pv-marquee-track">
         {loop.map((item, i) => (

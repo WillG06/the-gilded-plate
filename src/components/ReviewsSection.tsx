@@ -1,4 +1,4 @@
-import { REVIEWS } from "@/data/reviews";
+import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT, REVIEWS } from "@/data/reviews";
 import { FadeInSection } from "./FadeInSection";
 
 /** Small single-color star, sized for a compact rating row. */
@@ -57,8 +57,6 @@ function ReviewCard({ name, rating, text }: { name: string; rating: number; text
  *  boxed, widget-style cards. */
 export function ReviewsSection() {
   const shown = REVIEWS.slice(0, 4);
-  const average = REVIEWS.reduce((sum, r) => sum + r.rating, 0) / Math.max(REVIEWS.length, 1);
-
   return (
     <FadeInSection className="px-6 py-24 md:px-16">
       <div className="flex flex-wrap items-end justify-between gap-6">
@@ -74,9 +72,9 @@ export function ReviewsSection() {
             <GoogleMark />
             <span className="text-sm">
               <span className="font-display text-lg text-foreground">
-                {average.toFixed(1)}
+                {GOOGLE_RATING.toFixed(1)}
               </span>{" "}
-              from {REVIEWS.length} Google reviews
+              from {GOOGLE_REVIEW_COUNT} Google reviews
             </span>
           </a>
 
