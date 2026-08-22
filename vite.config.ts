@@ -7,8 +7,8 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-export default defineConfig({
-  base: "/the-gilded-plate/",
+export default defineConfig(({ command }) => ({
+  base: command === "build" ? "/the-gilded-plate/" : "/",
   plugins: [react(), tsconfigPaths(), tailwindcss()],
   resolve: {
     alias: {
@@ -18,4 +18,4 @@ export default defineConfig({
   build: {
     target: "es2022",
   },
-});
+}));

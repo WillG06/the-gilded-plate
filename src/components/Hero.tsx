@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { assetUrl } from "@/lib/utils";
 const hero1 = assetUrl("/img/hero_1.jpg");
@@ -184,9 +185,9 @@ export function Hero() {
           Pane &amp; Vino
         </h1>
         <span className="mt-6 block h-px w-16 bg-primary-foreground/40" />
-        <a href="/contact" className="btn btn--arch btn--ghost mt-8">
+        <Link to="/contact" className="btn btn--arch btn--ghost mt-8">
           <span>Prenota — book a table</span>
-        </a>
+        </Link>
       </motion.div>
 
       {/* Slide markers — old caption + marker layout, centered on the slider panel, white/maroon */}

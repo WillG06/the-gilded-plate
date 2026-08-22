@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Hero } from "@/components/Hero";
 import { FadeInSection } from "@/components/FadeInSection";
 import { assetUrl } from "@/lib/utils";
@@ -12,8 +12,13 @@ import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { InkPanel } from "@/components/InkPanel";
 import { PrivateDiningDialog } from "@/components/PrivateDiningDialog";
 import { MenuItemCard } from "@/components/MenuItemCard";
-import { MENU } from "@/data/menu";
+import { HOMEPAGE_SPECIALS, MENU } from "@/data/menu";
 const inkGrapes = assetUrl("/img/ink-grapes.png");
+
+// Chef's picks for the homepage teaser: the three off-menu specials plus
+// Porchetta from the printed menu.
+
+const FEATURED_ITEMS = [...HOMEPAGE_SPECIALS];
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -66,17 +71,20 @@ function Index() {
           <div>
             <p className="eyebrow">On the menu</p>
             <h2 className="mt-4 font-display text-5xl">A taste of tonight</h2>
+            
           </div>
-          <a
-            href="/menu"
+          <Link
+            to="/menu"
             className="text-xs tracking-[0.2em] uppercase underline underline-offset-4"
           >
             See the full menu
-          </a>
+          </Link>
         </div>
-        <div className="mt-12 grid gap-10 md:grid-cols-3">
-          {MENU.Dinner.slice(0, 3).map((item) => (
-            <MenuItemCard key={item.name} item={item} />
+        <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          {FEATURED_ITEMS.map((item) => (
+            <div key={item.name}>
+              <MenuItemCard item={item} />
+            </div>
           ))}
         </div>
       </FadeInSection>
@@ -92,12 +100,12 @@ function Index() {
           We hold a handful of tables for walk-ins, but weekends fill fast. Book ahead and we'll
           confirm by email.
         </p>
-        <a
-          href="/contact"
+        <Link
+          to="/contact"
           className="btn btn--arch btn--ghost mt-10"
         >
           <span>Book a table</span>
-        </a>
+        </Link>
         <div className="mt-6">
           <PrivateDiningDialog
             variant="bare"

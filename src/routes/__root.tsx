@@ -28,12 +28,12 @@ function NotFoundComponent() {
         >
           Back to home
         </Link>
-        <a
-          href="/contact"
+        <Link
+          to="/contact"
           className="border border-wine bg-wine px-6 py-3 text-[0.7rem] tracking-[0.24em] uppercase text-primary-foreground"
         >
           Book a table
-        </a>
+        </Link>
       </div>
     </div>
   );
@@ -60,9 +60,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           >
             Try again
           </button>
-          <a href="/" className="border border-border px-4 py-2 text-sm">
+          <Link to="/" className="border border-border px-4 py-2 text-sm">
             Go home
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -131,12 +131,12 @@ export function SiteNav() {
           </div>
 
           <div className="flex shrink-0 items-center gap-2">
-            <a
-              href="/contact"
+            <Link
+              to="/contact"
               className={`btn btn--arch btn--sm hidden sm:inline-flex ${floating ? "btn--ghost" : "btn--wine"}`}
             >
               <span>Book a table</span>
-            </a>
+            </Link>
 
             <a
               href={SITE.giftVouchers}
@@ -264,13 +264,13 @@ export function SiteNav() {
                       <Twitter aria-hidden strokeWidth={1.25} className="h-[18px] w-[18px]" />
                     </a>
                   </div>
-                  <a
-                    href="/contact"
+                  <Link
+                    to="/contact"
                     onClick={() => setOpen(false)}
                     className="btn btn--arch btn--wine w-full justify-center"
                   >
                     <span>Book a table</span>
-                  </a>
+                  </Link>
                   <a
                     href={SITE.giftVouchers}
                     target="_blank"
