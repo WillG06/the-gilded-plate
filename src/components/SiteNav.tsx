@@ -25,33 +25,28 @@ const itemVariants: Variants = {
   closed: { opacity: 0, y: 14 },
 };
 
-// Panel hinges in from the right edge: smaller + rotated + offset, then
-// swings flat and expands to fill — instead of a plain fade/slide.
+// Mobile panel opens downward from the header like a blind.
 const panelVariants: Variants = {
   closed: {
-    opacity: 0,
-    scale: 0.92,
-    rotateY: -18,
-    x: "6%",
-    transition: { duration: 0.3, ease: [0.4, 0, 1, 1] },
+    opacity: 1,
+    clipPath: "inset(0 0 100% 0)",
+    transition: { duration: 0.65, ease: [0.4, 0, 1, 1] },
   },
   open: {
     opacity: 1,
-    scale: 1,
-    rotateY: 0,
-    x: 0,
-    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+    clipPath: "inset(0 0 0% 0)",
+    transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
 const ctaVariants: Variants = {
   closed: { opacity: 0, y: 14 },
-  open: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut", delay: 0.45 } },
+  open: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut", delay: 0.65 } },
 };
 
 const taglineVariants: Variants = {
   closed: { opacity: 0, y: 10 },
-  open: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut", delay: 0.32 } },
+  open: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", delay: 0.5 } },
 };
 
 /** Sticky nav with persistent booking CTA + full-screen mobile takeover (feature 14). */
@@ -59,9 +54,8 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [mouseY, setMouseY] = useState(0);
+  const [cursorInRevealZone, setCursorInRevealZone] = useState(true);
   const [atPageEnd, setAtPageEnd] = useState(false);
-  const [viewportHeight, setViewportHeight] = useState(0);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const overHero = pathname === "/";
 
@@ -69,25 +63,24 @@ export function SiteNav() {
   // the mobile menu isn't open — opening the menu always forces the solid style.
   const floating = overHero && !scrolled && !open;
   const solid = scrolled || open;
-  const headerNearCursor = mouseY <= 96;
-  const cursorInTopThirtyPercent = viewportHeight > 0 && mouseY <= viewportHeight * 0.3;
-  const headerHidden = scrolled && !cursorInTopThirtyPercent && !headerNearCursor && !atPageEnd && !open;
+  const headerHidden = scrolled && !cursorInRevealZone && !atPageEnd && !open;
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 24);
       setAtPageEnd(window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8);
     };
-    const onResize = () => setViewportHeight(window.innerHeight);
-    const onMouseMove = (event: MouseEvent) => setMouseY(event.clientY);
-    onResize();
+    const onMouseMove = (event: MouseEvent) => {
+      const nextRevealZone = event.clientY <= Math.max(96, window.innerHeight * 0.3);
+      setCursorInRevealZone((previous) =>
+        previous === nextRevealZone ? previous : nextRevealZone,
+      );
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize, { passive: true });
     window.addEventListener("mousemove", onMouseMove, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
       window.removeEventListener("mousemove", onMouseMove);
     };
   }, []);
@@ -122,9 +115,19 @@ export function SiteNav() {
               : "border-transparent bg-paper text-foreground"
         }`}
       >
+        <span
+          aria-hidden
+          className={`pointer-events-none absolute right-0 left-0 z-0 ${
+            floating ? "bg-transparent" : solid ? "bg-paper/95" : "bg-paper"
+          }`}
+          style={{
+            top: "calc(-1 * env(safe-area-inset-top))",
+            height: "env(safe-area-inset-top)",
+          }}
+        />
         <nav
           aria-label="Primary"
-          className="relative z-[60] mx-auto grid min-h-16 max-w-[1600px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 md:px-10 lg:min-h-[72px]"
+          className="relative z-[60] mx-auto grid min-h-16 max-w-[1600px] grid-cols-[1fr_auto] items-center gap-4 px-5 md:px-10 lg:min-h-[72px] lg:grid-cols-[1fr_auto_1fr]"
         >
           <div className="flex min-w-0 items-center gap-8 justify-self-start">
             <Link to="/" className="font-display text-lg tracking-[0.22em] uppercase">
@@ -207,10 +210,8 @@ export function SiteNav() {
               onAnimationComplete={() => setIsAnimating(false)}
               style={{
                 top: `calc(env(safe-area-inset-top) + ${NAV_HEIGHT}px)`,
-                transformPerspective: 1200,
-                transformOrigin: "right center",
               }}
-              className="fixed right-0 bottom-0 left-0 z-40 flex flex-col bg-paper pb-[env(safe-area-inset-bottom)] text-foreground lg:hidden"
+              className="fixed right-0 bottom-0 left-0 z-40 flex flex-col bg-paper pb-[env(safe-area-inset-bottom)] text-foreground [will-change:clip-path] lg:hidden"
             >
               <div className="flex flex-1 flex-col overflow-y-auto px-6 pt-4 pb-10 sm:px-10">
                 <div>
