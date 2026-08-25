@@ -142,6 +142,36 @@
   }
 }
 
+@media print {
+  body {
+    background: white;
+  }
+
+  nav,
+  aside,
+  header,
+  footer,
+  button,
+  .ink-panel,
+  .film-grain::after {
+    display: none !important;
+  }
+
+  main {
+    display: block;
+  }
+
+  main > div {
+    display: block;
+    max-width: none;
+    padding: 0;
+  }
+
+  main > div > section {
+    display: block;
+  }
+}
+
 /* Sticky story split (feature 5) */
 .sticky-story {
   display: block;

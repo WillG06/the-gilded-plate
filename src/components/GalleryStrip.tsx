@@ -1,4 +1,6 @@
+// GalleryStrip.tsx
 import {
+  useEffect,
   useLayoutEffect,
   useRef,
   useState,
@@ -14,19 +16,16 @@ const inkGrapes = assetUrl("/img/ink-grapes.png");
 const inkPattern = assetUrl("/img/ink-pattern.png");
 
 const GALLERY_IMAGES = [
-
-  { src: assetUrl("/img/frontGlasses.jpg"), alt: "Close-up of the restaurant's wooden feature wall with wine bottles and decorative details" },
-  { src: assetUrl("/img/sideBarTables.jpg"), alt: "Close-up of the restaurant's wooden feature wall with wine bottles and decorative details" },
-  { src: assetUrl("/img/welllit.jpg"), alt: "Detailed view of the restaurant wall featuring wine bottles, artwork and rustic wooden shelving" },
-  { src: assetUrl("/img/hero_1.jpg"), alt: "Warmly lit dining room with wooden tables, chairs and wine bottles displayed along the walls" },
-  { src: assetUrl("/img/hero_2.jpg"), alt: "Restaurant dining area with wooden tables, blue chairs and light wood panelled walls" },
-  { src: assetUrl("/img/hero_3.jpg"), alt: "Light wood panelled restaurant wall decorated with framed artwork, wine bottles and greenery" },
-  { src: assetUrl("/img/hero_4.jpg"), alt: "Cosy restaurant interior with wooden tables, warm pendant lighting and wine displayed on the walls" },
-  { src: assetUrl("/img/heroWall2.jpg"), alt: "Warm restaurant interior featuring wooden walls, wine displays and ambient lighting" },
-  { src: assetUrl("/img/wallClose.jpg"), alt: "Close-up of the restaurant's wooden feature wall with wine bottles and decorative details" },
-  { src: assetUrl("/img/wallClose2.jpg"), alt: "Detailed view of the restaurant wall featuring wine bottles, artwork and rustic wooden shelving" },
-
-
+  { src: assetUrl("/img/frontGlasses.jpg"), alt: "Close-up of the restaurant's wooden feature wall with wine bottles and decorative details", caption: "The wine wall" },
+  { src: assetUrl("/img/sideBarTables.jpg"), alt: "Close-up of the restaurant's wooden feature wall with wine bottles and decorative details", caption: "A seat at the bar" },
+  { src: assetUrl("/img/welllit.jpg"), alt: "Detailed view of the restaurant wall featuring wine bottles, artwork and rustic wooden shelving", caption: "Evening light" },
+  { src: assetUrl("/img/hero_1.jpg"), alt: "Warmly lit dining room with wooden tables, chairs and wine bottles displayed along the walls", caption: "The dining room" },
+  { src: assetUrl("/img/hero_2.jpg"), alt: "Restaurant dining area with wooden tables, blue chairs and light wood panelled walls", caption: "Gather around" },
+  { src: assetUrl("/img/hero_3.jpg"), alt: "Light wood panelled restaurant wall decorated with framed artwork, wine bottles and greenery", caption: "Details" },
+  { src: assetUrl("/img/hero_4.jpg"), alt: "Cosy restaurant interior with wooden tables, warm pendant lighting and wine displayed on the walls", caption: "A warm welcome" },
+  { src: assetUrl("/img/heroWall2.jpg"), alt: "Warm restaurant interior featuring wooden walls, wine displays and ambient lighting", caption: "Pane & Vino" },
+  { src: assetUrl("/img/wallClose.jpg"), alt: "Close-up of the restaurant's wooden feature wall with wine bottles and decorative details", caption: "The little things" },
+  { src: assetUrl("/img/wallClose2.jpg"), alt: "Detailed view of the restaurant wall featuring wine bottles, artwork and rustic wooden shelving", caption: "Made for lingering" },
 ];
 
 // Three copies back to back — the middle copy is where we start, giving
@@ -64,17 +63,28 @@ function ArrowRightIcon() {
  * three copies of the strip are rendered, and once scroll position nears
  * either edge of the middle copy, it's silently reset one set-width over —
  * so dragging in one direction never runs out of images.
+ *
+ * The loop-reset only happens once scrolling has settled (see onScroll) —
+ * doing it mid-gesture used to fight iOS/Android momentum scrolling and
+ * caused a visible stutter on mobile.
  */
 function useInfiniteDragScroll() {
   const ref = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const drag = useRef({ startX: 0, startScroll: 0, moved: false, pointerId: -1 });
+  const scrollEndTimer = useRef<number | undefined>(undefined);
 
   // Start in the middle copy so there's a full set-width of buffer either side.
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
     el.scrollLeft = el.scrollWidth / 3;
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (scrollEndTimer.current) window.clearTimeout(scrollEndTimer.current);
+    };
   }, []);
 
   const wrap = () => {
@@ -91,6 +101,7 @@ function useInfiniteDragScroll() {
 
   const onPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
     if (e.pointerType !== "mouse" && e.pointerType !== "pen") return;
+    if (e.target instanceof Element && e.target.closest("button, a")) return;
     const el = ref.current;
     if (!el) return;
     drag.current = { startX: e.clientX, startScroll: el.scrollLeft, moved: false, pointerId: e.pointerId };
@@ -115,7 +126,6 @@ function useInfiniteDragScroll() {
     setIsDragging(false);
   };
 
-  // Swallow the click that would otherwise fire right after a drag release.
   const onClickCapture = (e: ReactMouseEvent) => {
     if (drag.current.moved) {
       e.preventDefault();
@@ -123,8 +133,10 @@ function useInfiniteDragScroll() {
     }
   };
 
-  // Catches touch scrolling and wheel scrolling too, not just mouse drag.
-  const onScroll = () => wrap();
+  const onScroll = () => {
+    if (scrollEndTimer.current) window.clearTimeout(scrollEndTimer.current);
+    scrollEndTimer.current = window.setTimeout(wrap, 120);
+  };
 
   return {
     ref,
@@ -155,7 +167,7 @@ export function GalleryStrip() {
           onPointerLeave={drag.onPointerLeave}
           onClickCapture={drag.onClickCapture}
           onScroll={drag.onScroll}
-          className={`flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-6 select-none [scrollbar-width:none] md:gap-8 md:px-16 [&::-webkit-scrollbar]:hidden ${
+          className={`flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth touch-pan-x overscroll-x-contain px-6 pb-6 select-none [scrollbar-width:none] [will-change:scroll-position] md:gap-8 md:px-16 [&::-webkit-scrollbar]:hidden ${
             drag.isDragging ? "cursor-grabbing" : "cursor-grab"
           }`}
         >
@@ -181,7 +193,7 @@ export function GalleryStrip() {
                   height={900}
                   loading="lazy"
                   draggable={false}
-                  className="h-[260px] w-full object-cover sm:h-[340px] md:h-[420px]"
+                  className="aspect-[7/9] h-[300px] w-full object-cover sm:h-[380px] md:h-[460px]"
                 />
               </button>
               <figcaption className="mt-4 px-1 pb-1 font-script text-3xl text-primary-foreground md:text-4xl">

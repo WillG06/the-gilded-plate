@@ -168,12 +168,13 @@ function MenuPage() {
             </>
           )}
 
-          <a
-            href={assetUrl("/menus/pane-e-vino.pdf")}
-            className="mt-12 inline-block text-[0.65rem] tracking-[0.2em] uppercase underline underline-offset-4"
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="mt-12 inline-block cursor-pointer text-left text-[0.65rem] tracking-[0.2em] uppercase underline underline-offset-4"
           >
-            Download PDF menu
-          </a>
+            Print / save PDF menu
+          </button>
 
           <div className="mt-12 border-t border-border pt-8">
             <p className="eyebrow">Private dining</p>

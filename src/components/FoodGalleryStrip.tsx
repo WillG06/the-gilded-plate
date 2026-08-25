@@ -1,4 +1,6 @@
+// FoodGalleryStrip.tsx
 import {
+  useEffect,
   useLayoutEffect,
   useRef,
   useState,
@@ -106,17 +108,28 @@ function ArrowRightIcon() {
  * three copies of the strip are rendered, and once scroll position nears
  * either edge of the middle copy, it's silently reset one set-width over —
  * so dragging in one direction never runs out of images.
+ *
+ * The loop-reset only happens once scrolling has settled (see onScroll) —
+ * doing it mid-gesture used to fight iOS/Android momentum scrolling and
+ * caused a visible stutter on mobile.
  */
 function useInfiniteDragScroll() {
   const ref = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const drag = useRef({ startX: 0, startScroll: 0, moved: false, pointerId: -1 });
+  const scrollEndTimer = useRef<number | undefined>(undefined);
 
   // Start in the middle copy so there's a full set-width of buffer either side.
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
     el.scrollLeft = el.scrollWidth / 3;
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (scrollEndTimer.current) window.clearTimeout(scrollEndTimer.current);
+    };
   }, []);
 
   const wrap = () => {
@@ -133,6 +146,7 @@ function useInfiniteDragScroll() {
 
   const onPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
     if (e.pointerType !== "mouse" && e.pointerType !== "pen") return;
+    if (e.target instanceof Element && e.target.closest("button, a")) return;
     const el = ref.current;
     if (!el) return;
     drag.current = { startX: e.clientX, startScroll: el.scrollLeft, moved: false, pointerId: e.pointerId };
@@ -146,7 +160,7 @@ function useInfiniteDragScroll() {
     const dx = e.clientX - drag.current.startX;
     if (Math.abs(dx) > 3) drag.current.moved = true;
     el.scrollLeft = drag.current.startScroll - dx;
-    wrap();
+    wrap(); // instant here — this is a direct mouse drag, not momentum scroll
   };
 
   const endDrag = (e: ReactPointerEvent<HTMLDivElement>) => {
@@ -165,8 +179,12 @@ function useInfiniteDragScroll() {
     }
   };
 
-  // Catches touch scrolling and wheel scrolling too, not just mouse drag.
-  const onScroll = () => wrap();
+  // Native touch/wheel scrolling: wait until scrolling actually settles
+  // before silently repositioning, instead of correcting on every tick.
+  const onScroll = () => {
+    if (scrollEndTimer.current) window.clearTimeout(scrollEndTimer.current);
+    scrollEndTimer.current = window.setTimeout(wrap, 120);
+  };
 
   return {
     ref,
@@ -197,7 +215,7 @@ export function FoodGalleryStrip() {
           onPointerLeave={drag.onPointerLeave}
           onClickCapture={drag.onClickCapture}
           onScroll={drag.onScroll}
-          className={`flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-6 select-none [scrollbar-width:none] md:gap-8 md:px-16 [&::-webkit-scrollbar]:hidden ${
+          className={`flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth touch-pan-x overscroll-x-contain px-6 pb-6 select-none [scrollbar-width:none] [will-change:scroll-position] md:gap-8 md:px-16 [&::-webkit-scrollbar]:hidden ${
             drag.isDragging ? "cursor-grabbing" : "cursor-grab"
           }`}
         >
@@ -223,7 +241,7 @@ export function FoodGalleryStrip() {
                   height={900}
                   loading="lazy"
                   draggable={false}
-                  className="h-[260px] w-full object-cover sm:h-[340px] md:h-[420px]"
+                  className="aspect-[7/9] h-[300px] w-full object-cover sm:h-[380px] md:h-[460px]"
                 />
               </button>
               <figcaption className="mt-4 px-1 pb-1 font-script text-3xl text-primary-foreground md:text-4xl">

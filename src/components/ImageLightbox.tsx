@@ -1,4 +1,6 @@
+// ImageLightbox.tsx
 import { useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "motion/react";
 
 interface LightboxImage {
@@ -36,16 +38,27 @@ export function ImageLightbox({ images, index, onClose, onNavigate }: ImageLight
       if (e.key === "ArrowRight") goNext();
     };
     window.addEventListener("keydown", onKey);
-    // Lock background scroll while the preview is open.
+    // Keep the scrollbar footprint while locking the page so the layout does not shift.
     const prevOverflow = document.body.style.overflow;
+    const prevPaddingRight = document.body.style.paddingRight;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
+    if (scrollbarWidth > 0) {
+      const currentPaddingRight = Number.parseFloat(getComputedStyle(document.body).paddingRight) || 0;
+      document.body.style.paddingRight = `${currentPaddingRight + scrollbarWidth}px`;
+    }
     return () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
+      document.body.style.paddingRight = prevPaddingRight;
     };
   }, [isOpen, onClose, goPrev, goNext]);
 
-  return (
+  // Portal to document.body so `fixed` positioning is always relative to the
+  // real viewport, never to a transformed ancestor (e.g. a Framer Motion
+  // element mid-animation, which silently becomes a containing block for
+  // any `position: fixed` descendant).
+  return createPortal(
     <AnimatePresence>
       {isOpen && current && (
         <motion.div
@@ -126,6 +139,7 @@ export function ImageLightbox({ images, index, onClose, onNavigate }: ImageLight
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

@@ -1,3 +1,4 @@
+// data/reviews.ts
 export interface Review {
   name: string;
   rating: number;
@@ -5,7 +6,11 @@ export interface Review {
 }
 
 export const GOOGLE_RATING = 4.7;
-export const GOOGLE_REVIEW_COUNT = 310;
+export const GOOGLE_REVIEW_COUNT = 311;
+
+// Get this from Google's Place ID Finder (see chat) — replace PLACE_ID once you have it.
+export const GOOGLE_REVIEWS_URL =
+  "https://search.google.com/local/reviews?placeid=PLACE_ID&q=Pane+%26+Vino";
 
 export const REVIEWS: Review[] = [
   {
@@ -24,13 +29,18 @@ export const REVIEWS: Review[] = [
     text: "Absolutely amazing experience from start to finish. The welcome, the service, the recommendations, the knowledge of the food and the quality of the food was just superb. My grandparents are all from Italy, so we head back very often. It reminds me of the very traditional Italian restaurants in the small villages of Italy but with a sophistication.",
   },
   {
-    name: "Hannah",
+    name: "S. K.",
     rating: 5,
-    text: "Booked for a birthday and they made a real fuss of us without ever being over the top. The focaccia alone is worth the trip across the city, and the wine list is full of things you won't find anywhere else in Birmingham.",
+    text: "The most authentic Italian food in the West Midlands. The ingredients were of highest quality, service impeccable and the prices humble. Our most favourite plate was the bone marrow which we got as a starter. Thank you for the kind service as well by the owner Matteo himself!",
   },
   {
-    name: "Michael",
+    name: "Justin",
     rating: 5,
-    text: "Everything is done with passion. You can see how much care has been put into this business from the owners. Will most definitely be back again, soon if not weekly, introducing new friends and family each time.",
+    text: "A great little independent restaurant with good traditional menu and specials. The pasta and breads are all freshly made, which really shows in the quality. Highly recommend the Gamberoni and Arancini starters. The Fettuccini Porcini and Ravioli were both superb, aswell as the ‘Real’ Carbonara and the fab Garlic Bun! Highly recommend this little gem!",
+  },
+  {
+    name: "Ucha",
+    rating: 5,
+    text: "First time visiting here and the flavours brought back memories of being in Italy 🇮🇹 Amazing food, highly recommend!! Lovely welcoming atmosphere and hospitality is second to none. This place will now be our regular spot for our Italian kick!",
   },
 ];

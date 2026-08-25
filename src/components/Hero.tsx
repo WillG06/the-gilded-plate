@@ -103,7 +103,6 @@ export function Hero() {
   const [index, setIndex] = useState(0);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
   useEffect(() => {
@@ -139,7 +138,7 @@ export function Hero() {
         </defs>
       </svg>
 
-      <motion.div style={{ y }} className="absolute inset-0">
+      <div className="absolute inset-0">
         <AnimatePresence initial={false} mode="sync">
           <motion.img
             key={slide.src}
@@ -182,7 +181,7 @@ export function Hero() {
             maskSize: "100% 100%",
           }}
         />
-      </motion.div>
+      </div>
 
       <div
         className="absolute z-10 overflow-hidden border border-primary-foreground/45 bg-black/20 p-1 shadow-lg md:hidden"
