@@ -85,12 +85,22 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  html {
+    background-color: var(--color-background);
+  }
+
   h1,
   h2,
   h3,
   h4 {
     font-family: var(--font-display);
     font-weight: 500;
+  }
+}
+
+@media (max-width: 1023px) {
+  .site-nav-safe-area {
+    background-color: var(--paper);
   }
 }
 

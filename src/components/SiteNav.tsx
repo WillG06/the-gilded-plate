@@ -117,7 +117,7 @@ export function SiteNav() {
       >
         <span
           aria-hidden
-          className={`pointer-events-none absolute right-0 left-0 z-0 ${
+          className={`site-nav-safe-area pointer-events-none absolute right-0 left-0 z-0 ${
             floating ? "bg-transparent" : solid ? "bg-paper/95" : "bg-paper"
           }`}
           style={{
