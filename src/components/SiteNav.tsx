@@ -103,7 +103,7 @@ export function SiteNav() {
   return (
     <>
       <header
-        className={`fixed top-0 right-0 left-0 z-50 border-b pt-[env(safe-area-inset-top)] transition-transform duration-[1200ms] ease-in-out will-change-transform ${headerHidden
+        className={`${overHero ? "fixed" : "sticky"} top-0 right-0 left-0 z-50 isolate border-b pt-[env(safe-area-inset-top)] transition-transform duration-[1200ms] ease-in-out will-change-transform ${headerHidden
           ? "lg:pointer-events-none lg:-translate-y-full"
           : "translate-y-0"
         } ${floating
@@ -113,6 +113,7 @@ export function SiteNav() {
             : "border-transparent bg-paper text-foreground"
         } max-lg:bg-paper max-lg:text-foreground`}
         data-scrolled={scrolled}
+        style={{ backgroundColor: "var(--paper)" }}
       >
         <span
           aria-hidden
@@ -191,7 +192,6 @@ export function SiteNav() {
         </nav>
       </header>
 
-      {!overHero && <div aria-hidden className="h-[calc(4rem+env(safe-area-inset-top))] lg:h-[72px]" />}
 
       {/* Portalled to <body> so a filtered/transformed ancestor (e.g. the header's
           own backdrop-blur) can never hijack this panel's fixed positioning.
