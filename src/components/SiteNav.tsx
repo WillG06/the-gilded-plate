@@ -103,15 +103,16 @@ export function SiteNav() {
   return (
     <>
       <header
-        className={`${overHero ? "fixed" : "sticky"} top-0 right-0 left-0 z-50 border-b pt-[env(safe-area-inset-top)] transition-transform duration-[1200ms] ease-in-out will-change-transform ${headerHidden
-            ? "lg:pointer-events-none lg:-translate-y-full"
-            : "translate-y-0"
-          } ${floating
-            ? "border-transparent bg-transparent text-primary-foreground"
-            : solid
-              ? "border-border bg-paper/95 text-foreground backdrop-blur-md"
-              : "border-transparent bg-paper text-foreground"
-          } max-lg:bg-paper max-lg:text-foreground`}
+        className={`fixed top-0 right-0 left-0 z-50 border-b pt-[env(safe-area-inset-top)] transition-transform duration-[1200ms] ease-in-out will-change-transform ${headerHidden
+          ? "lg:pointer-events-none lg:-translate-y-full"
+          : "translate-y-0"
+        } ${floating
+          ? "border-transparent bg-transparent text-primary-foreground"
+          : solid
+            ? "border-border bg-paper/95 text-foreground backdrop-blur-md"
+            : "border-transparent bg-paper text-foreground"
+        } max-lg:bg-paper max-lg:text-foreground`}
+        data-scrolled={scrolled}
       >
         <span
           aria-hidden
@@ -121,7 +122,6 @@ export function SiteNav() {
             backgroundColor: "var(--paper)",
           }}
         />
-        
         <nav
           aria-label="Primary"
           className="relative z-[60] mx-auto grid min-h-16 max-w-[1600px] grid-cols-[1fr_auto] items-center gap-4 px-5 md:px-10 lg:min-h-[72px] lg:grid-cols-[1fr_auto_1fr]"
@@ -190,6 +190,8 @@ export function SiteNav() {
           </div>
         </nav>
       </header>
+
+      {!overHero && <div aria-hidden className="h-[calc(4rem+env(safe-area-inset-top))] lg:h-[72px]" />}
 
       {/* Portalled to <body> so a filtered/transformed ancestor (e.g. the header's
           own backdrop-blur) can never hijack this panel's fixed positioning.
