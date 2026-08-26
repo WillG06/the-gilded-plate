@@ -98,11 +98,7 @@
   }
 }
 
-@media (max-width: 1023px) {
-  .site-nav-safe-area {
-    background-color: var(--paper);
-  }
-}
+
 
 
 /* Film grain overlay (feature 2) */

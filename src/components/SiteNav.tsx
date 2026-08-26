@@ -103,28 +103,25 @@ export function SiteNav() {
   return (
     <>
       <header
-        className={`${overHero ? "fixed" : "sticky"} top-0 right-0 left-0 z-50 border-b pt-[env(safe-area-inset-top)] transition-transform duration-[1200ms] ease-in-out will-change-transform ${
-          headerHidden
+        className={`${overHero ? "fixed" : "sticky"} top-0 right-0 left-0 z-50 border-b pt-[env(safe-area-inset-top)] transition-transform duration-[1200ms] ease-in-out will-change-transform ${headerHidden
             ? "lg:pointer-events-none lg:-translate-y-full"
             : "translate-y-0"
-        } ${
-          floating
+          } ${floating
             ? "border-transparent bg-transparent text-primary-foreground"
             : solid
               ? "border-border bg-paper/95 text-foreground backdrop-blur-md"
               : "border-transparent bg-paper text-foreground"
-        }`}
+          }`}
       >
         <span
           aria-hidden
-          className={`site-nav-safe-area pointer-events-none absolute right-0 left-0 z-0 ${
-            floating ? "bg-transparent" : solid ? "bg-paper/95" : "bg-paper"
-          }`}
+          className="pointer-events-none absolute inset-x-0 top-0 z-0"
           style={{
-            top: "calc(-1 * env(safe-area-inset-top))",
             height: "env(safe-area-inset-top)",
+            backgroundColor: floating ? "transparent" : "var(--paper)",
           }}
         />
+        
         <nav
           aria-label="Primary"
           className="relative z-[60] mx-auto grid min-h-16 max-w-[1600px] grid-cols-[1fr_auto] items-center gap-4 px-5 md:px-10 lg:min-h-[72px] lg:grid-cols-[1fr_auto_1fr]"
@@ -253,7 +250,7 @@ export function SiteNav() {
                   variants={taglineVariants}
                   className="flex flex-1 items-center justify-center px-4 py-8 text-center"
                 >
-                  
+
                 </motion.div>
 
                 <motion.div variants={ctaVariants} className="flex flex-col gap-6">
