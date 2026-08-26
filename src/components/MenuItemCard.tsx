@@ -21,8 +21,8 @@ export function MenuItemCard({ item }: { item: MenuItem }) {
           alt={item.name}
           width={1400}
           height={1000}
-          loading="lazy"
-          className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          loading="eager"
+          className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-105 md:aspect-[4/3]"
         />
         </div>
       </div>

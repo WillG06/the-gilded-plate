@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { FadeInSection } from "@/components/FadeInSection";
 import { FoodGalleryStrip } from "@/components/FoodGalleryStrip";
 import { InkPanel } from "@/components/InkPanel";
 import { PrivateDiningDialog } from "@/components/PrivateDiningDialog";
@@ -186,7 +185,7 @@ function MenuPage() {
         </aside>
 
         {/* Traditional printed menu */}
-        <FadeInSection key={`${tab}-${diets.join()}`}>
+        <div key={`${tab}-${diets.join()}`}>
           <div ref={panelRef} className="border border-border bg-card px-6 py-14 md:px-16 md:py-20 scroll-mt-28">
             <div className="text-center">
               <p className="eyebrow">Pane &amp; Vino</p>
@@ -202,7 +201,7 @@ function MenuPage() {
               <SoftDrinksPage />
             )}
           </div>
-        </FadeInSection>
+        </div>
       </div>
 
       <FoodGalleryStrip />

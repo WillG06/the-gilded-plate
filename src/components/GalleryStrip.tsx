@@ -130,6 +130,7 @@ function useInfiniteDragScroll() {
     if (drag.current.moved) {
       e.preventDefault();
       e.stopPropagation();
+      drag.current.moved = false;
     }
   };
 
@@ -167,8 +168,8 @@ export function GalleryStrip() {
           onPointerLeave={drag.onPointerLeave}
           onClickCapture={drag.onClickCapture}
           onScroll={drag.onScroll}
-          className={`flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth touch-pan-x overscroll-x-contain px-6 pb-6 select-none [scrollbar-width:none] [will-change:scroll-position] md:gap-8 md:px-16 [&::-webkit-scrollbar]:hidden ${
-            drag.isDragging ? "cursor-grabbing" : "cursor-grab"
+          className={`flex snap-x snap-mandatory gap-5 overflow-x-auto touch-pan-x overscroll-x-contain px-6 pb-6 select-none [scrollbar-width:none] [will-change:scroll-position] md:gap-8 md:px-16 [&::-webkit-scrollbar]:hidden ${
+            drag.isDragging ? "cursor-grabbing scroll-auto" : "cursor-grab scroll-smooth"
           }`}
         >
           {STRIP_IMAGES.map((img, i) => (
@@ -178,7 +179,7 @@ export function GalleryStrip() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, ease: "easeOut", delay: (i % 5) * 0.12 }}
-              className={`framed-dark gallery-frame w-[68vw] shrink-0 snap-start sm:w-[46vw] md:w-[300px] ${OFFSETS[i % OFFSETS.length]}`}
+              className={`framed-dark gallery-frame w-[82vw] shrink-0 snap-start sm:w-[46vw] md:w-[300px] ${OFFSETS[i % OFFSETS.length]}`}
             >
               <button
                 type="button"
@@ -191,9 +192,9 @@ export function GalleryStrip() {
                   alt={img.alt}
                   width={700}
                   height={900}
-                  loading="lazy"
+                  loading="eager"
                   draggable={false}
-                  className="aspect-[7/9] h-[300px] w-full object-cover sm:h-[380px] md:h-[460px]"
+                  className="aspect-[3/4] h-auto w-full object-cover sm:h-[380px] md:aspect-[7/9] md:h-[460px]"
                 />
               </button>
               <figcaption className="mt-4 px-1 pb-1 font-script text-3xl text-primary-foreground md:text-4xl">

@@ -377,7 +377,7 @@ export const HOMEPAGE_SPECIALS: MenuImgItem[] = [
   {
     name: "Tortellini alla Panna",
     description:
-      "Delicate handmade tortellini filled with Parmesan and prosciutto, finished in a silky cream sauce.",
+      "Delicate handmade tortellini filled with braised beef, served with a cream, paresan sauce.",
     price: "Ask your server",
     image: imgTortellini,
     course: "Specials",
