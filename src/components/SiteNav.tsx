@@ -257,7 +257,7 @@ export function SiteNav() {
                 <motion.div variants={ctaVariants} className="flex flex-col gap-6">
                   <div className="flex items-center justify-center gap-6">
                     <a
-                      href={SITE.instagram ?? "#"}
+                      href={SITE.social.instagram}
                       target="_blank"
                       rel="noreferrer"
                       aria-label="Instagram"
@@ -266,7 +266,7 @@ export function SiteNav() {
                       <Instagram aria-hidden strokeWidth={1.25} className="h-[18px] w-[18px]" />
                     </a>
                     <a
-                      href={SITE.facebook ?? "#"}
+                      href={SITE.social.facebook}
                       target="_blank"
                       rel="noreferrer"
                       aria-label="Facebook"
@@ -275,7 +275,7 @@ export function SiteNav() {
                       <Facebook aria-hidden strokeWidth={1.25} className="h-[18px] w-[18px]" />
                     </a>
                     <a
-                      href={SITE.twitter ?? "#"}
+                      href={SITE.social.tripadvisor}
                       target="_blank"
                       rel="noreferrer"
                       aria-label="Twitter"
