@@ -103,7 +103,7 @@ export function SiteNav() {
   return (
     <>
       <header
-        className={`${overHero ? "fixed" : "sticky"} top-0 right-0 left-0 z-50 isolate border-b pt-[env(safe-area-inset-top)] transition-transform duration-[1200ms] ease-in-out will-change-transform ${headerHidden
+        className={`site-nav ${overHero ? "fixed" : "sticky"} top-0 right-0 left-0 z-50 isolate border-b pt-[env(safe-area-inset-top)] transition-transform duration-[1200ms] ease-in-out will-change-transform ${headerHidden
           ? "lg:pointer-events-none lg:-translate-y-full"
           : "translate-y-0"
         } ${floating
@@ -113,7 +113,6 @@ export function SiteNav() {
             : "border-transparent bg-paper text-foreground"
         } max-lg:bg-paper max-lg:text-foreground`}
         data-scrolled={scrolled}
-        style={{ backgroundColor: "var(--paper)" }}
       >
         <span
           aria-hidden
@@ -138,7 +137,7 @@ export function SiteNav() {
               <li key={l.to}>
                 <Link
                   to={l.to}
-                  className={`text-xs tracking-[0.2em] uppercase transition-colors ${floating ? "text-primary-foreground/75 hover:text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                  className={`text-xs tracking-[0.2em] uppercase transition-colors max-lg:text-foreground ${floating ? "text-primary-foreground/75 hover:text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
                 >
                   {l.label}
                 </Link>
@@ -147,7 +146,7 @@ export function SiteNav() {
             <li>
               <PrivateDiningDialog
                 variant="bare"
-                className={`!text-xs !tracking-[0.2em] !no-underline ${floating ? "text-primary-foreground/75 hover:text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                className={`!text-xs !tracking-[0.2em] !no-underline max-lg:!text-foreground ${floating ? "text-primary-foreground/75 hover:text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
                 label="Private dining"
               />
             </li>
@@ -156,7 +155,7 @@ export function SiteNav() {
           <div className="flex shrink-0 items-center gap-2 justify-self-end">
             <Link
               to="/contact"
-              className={`btn btn--arch btn--sm hidden sm:inline-flex ${floating ? "btn--ghost" : "btn--wine"}`}
+              className={`btn btn--arch btn--sm ${floating ? "hidden" : "inline-flex"} ${floating ? "btn--ghost" : "btn--wine"}`}
             >
               <span>Book a table</span>
             </Link>

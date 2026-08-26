@@ -111,6 +111,14 @@
   }
 }
 
+@media (max-width: 1023px) {
+  .site-nav {
+    top: calc(-1 * env(safe-area-inset-top));
+    padding-top: calc(env(safe-area-inset-top) * 2);
+    background-color: var(--paper) !important;
+  }
+}
+
 
 
 
