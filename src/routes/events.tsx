@@ -4,6 +4,7 @@ import { FadeInSection } from "@/components/FadeInSection";
 import { GalleryStrip } from "@/components/GalleryStrip";
 import { EVENTS } from "@/data/events";
 import { assetUrl } from "@/lib/utils";
+import { SITE } from "@/data/site";
 
 const inkWine = assetUrl("/img/ink-wine.png");
 
@@ -91,9 +92,9 @@ export const Route = createFileRoute("/events")({
         property: "og:description",
         content: "Wine suppers, pasta classes and long-table Sundays in Birmingham.",
       },
-      { property: "og:url", content: "/events" },
+      { property: "og:url", content: `${SITE.url}/events` },
     ],
-    links: [{ rel: "canonical", href: "/events" }],
+    links: [{ rel: "canonical", href: `${SITE.url}/events` }],
   }),
 });
 

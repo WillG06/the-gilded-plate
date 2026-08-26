@@ -73,12 +73,15 @@ const restaurantSchema = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
   name: SITE.name,
+  url: `${SITE.url}/`,
+  image: `${SITE.url}/og-image.jpg`,
   telephone: SITE.phone,
   email: SITE.email,
   servesCuisine: "Italian",
   priceRange: "££",
-  menu: "/menu",
+  menu: `${SITE.url}/menu`,
   hasMap: "https://maps.google.com/?q=170+Gravelly+Lane+Erdington+Birmingham+B23+5SN",
+  sameAs: [SITE.social.instagram, SITE.social.facebook, SITE.social.tripadvisor],
   address: {
     "@type": "PostalAddress",
     streetAddress: SITE.address.street,
@@ -87,13 +90,20 @@ const restaurantSchema = {
     addressCountry: "GB",
   },
   openingHours: [
-    "Mo 12:00-22:00",
-    "We 12:00-22:00",
-    "Th 12:00-22:00",
-    "Fr 12:00-23:00",
-    "Sa 12:00-23:00",
-    "Su 12:00-21:00",
+    "Tu-Sa 12:00-22:00",
   ],
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "https://schema.org/Tuesday",
+      "https://schema.org/Wednesday",
+      "https://schema.org/Thursday",
+      "https://schema.org/Friday",
+      "https://schema.org/Saturday",
+    ],
+    opens: "12:00",
+    closes: "22:00",
+  },
 };
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
@@ -110,6 +120,10 @@ function RootComponent() {
       <Loader />
       <FilmGrain />
       <SiteNav />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantSchema) }}
+      />
       {/* Required: nested routes render here. */}
       <Outlet />
       <SiteFooter />

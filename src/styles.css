@@ -83,10 +83,12 @@
     color: var(--color-foreground);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
   html {
     background-color: var(--color-background);
+    overflow-x: hidden;
   }
 
   h1,

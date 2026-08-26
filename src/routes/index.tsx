@@ -13,6 +13,7 @@ import { InkPanel } from "@/components/InkPanel";
 import { PrivateDiningDialog } from "@/components/PrivateDiningDialog";
 import { MenuItemCard } from "@/components/MenuItemCard";
 import { HOMEPAGE_SPECIALS, MENU } from "@/data/menu";
+import { SITE } from "@/data/site";
 const inkGrapes = assetUrl("/img/ink-grapes.png");
 
 // Chef's picks for the homepage teaser: the three off-menu specials plus
@@ -35,9 +36,9 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Handmade pasta, 48-hour focaccia and honest Italian wine in Erdington.",
       },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: `${SITE.url}/` },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: `${SITE.url}/` }],
   }),
 });
 

@@ -1,4 +1,3 @@
-import { Gift } from "lucide-react";
 import { SITE } from "@/data/site";
 import { assetUrl } from "@/lib/utils";
 const inkWine = assetUrl("/img/ink-wine.png");
@@ -32,14 +31,6 @@ export function SiteFooter() {
           <li>
             <a href={SITE.social.tripadvisor} className="underline underline-offset-4">
               Tripadvisor
-            </a>
-          </li>
-          <li>
-            <a
-              href={SITE.giftVouchers}
-              className="inline-flex items-center gap-1.5 underline underline-offset-4"
-            >
-              <Gift aria-hidden className="h-3.5 w-3.5" /> Gift Vouchers
             </a>
           </li>
         </ul>

@@ -4,6 +4,7 @@ import { BookingForm } from "@/components/BookingForm";
 import { FindUs } from "@/components/FindUs";
 import { InkPanel } from "@/components/InkPanel";
 import { assetUrl } from "@/lib/utils";
+import { SITE } from "@/data/site";
 const inkBread = assetUrl("/img/ink-bread.png");
 
 export const Route = createFileRoute("/contact")({
@@ -21,9 +22,9 @@ export const Route = createFileRoute("/contact")({
         property: "og:description",
         content: "Reservations, enquiries, opening hours and directions in Erdington, Birmingham.",
       },
-      { property: "og:url", content: "/contact" },
+      { property: "og:url", content: `${SITE.url}/contact` },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+    links: [{ rel: "canonical", href: `${SITE.url}/contact` }],
   }),
 });
 

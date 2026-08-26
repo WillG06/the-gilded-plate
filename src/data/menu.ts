@@ -23,7 +23,15 @@ export type DietaryTag =
 // "Specials" is off-menu — it never appears on the printed menu, so it's
 // intentionally excluded from COURSE_ORDER and TAB_COURSES below. It exists
 // only so HOMEPAGE_SPECIALS (further down) can satisfy the MenuItem type.
-export type Course = "Pasta" | "Pizza" | "Secondi" | "Sides" | "Desserts" | "Specials";
+export type Course =
+  | "Nibbles"
+  | "Antipasti"
+  | "Pasta"
+  | "Pizza"
+  | "Secondi"
+  | "Sides"
+  | "Desserts"
+  | "Specials";
 
 export interface MenuItem {
   name: string;
@@ -47,18 +55,26 @@ export interface MenuImgItem {
   image?: string;
 }
 
-export type MenuTab = "Pasta" | "Pizza & Desserts" | "Secondi & Sides" | "Wine & Cocktails" | "Soft Drinks";
+export type MenuTab =
+  | "Nibbles & Antipasti"
+  | "Pasta"
+  | "Secondi & Sides"
+  | "Pizza & Desserts"
+  | "Wine & Cocktails"
+  | "Soft Drinks";
 
 export const TAB_ORDER: MenuTab[] = [
+  "Nibbles & Antipasti",
   "Pasta",
-  "Pizza & Desserts",
   "Secondi & Sides",
+  "Pizza & Desserts",
   "Wine & Cocktails",
   "Soft Drinks",
 ];
 
 // Which food courses render (and in which order) under each tab.
 export const TAB_COURSES: Partial<Record<MenuTab, Course[]>> = {
+  "Nibbles & Antipasti": ["Nibbles", "Antipasti"],
   "Pasta": ["Pasta"],
   "Pizza & Desserts": ["Pizza", "Desserts"],
   "Secondi & Sides": ["Secondi", "Sides"],
@@ -84,9 +100,106 @@ export const COURSE_EXTRAS: Partial<Record<Course, Extra[]>> = {
   ],
 };
 
-export const COURSE_ORDER: Course[] = ["Pasta", "Pizza", "Secondi", "Sides", "Desserts"];
+export const COURSE_ORDER: Course[] = [
+  "Nibbles",
+  "Antipasti",
+  "Pasta",
+  "Pizza",
+  "Secondi",
+  "Sides",
+  "Desserts",
+];
 
 export const MENU: MenuItem[] = [
+  // ── NIBBLES & ANTIPASTI ─────────────────────────────────
+  {
+    name: "Olives",
+    description: "",
+    price: "£5.00",
+    course: "Nibbles",
+    tags: ["Vegan", "Gluten-Free"],
+  },
+  {
+    name: "Pickled Vegetables",
+    description: "",
+    price: "£5.00",
+    course: "Nibbles",
+    tags: ["Gluten-Free"],
+  },
+  {
+    name: "Calamari Fritti",
+    description: "Crispy squid rings served with squid ink aioli.",
+    price: "£9.50",
+    course: "Antipasti",
+  },
+  {
+    name: "Tagliere di Salumi e Formaggi (x2)",
+    description: "Sharing platter of Italian cured meats and cheeses, pickles and our bread.",
+    price: "£24.00",
+    course: "Antipasti",
+  },
+  {
+    name: "Fritto all'Italiana",
+    description: "Fried mix of mozzarella, stuffed olives, courgette flowers, mini arancini and potato croquettes.",
+    price: "£10.50",
+    course: "Antipasti",
+  },
+  {
+    name: "Bruschetta",
+    description: "Fresh tomatoes, roasted pepper, basil and oregano on bread, topped with lettuce.",
+    price: "£8.00",
+    course: "Antipasti",
+    tags: ["Vegetarian"],
+  },
+  {
+    name: "Arancini alla Norma",
+    description: "Fried rice croquettes with tomato sauce, aubergines and mozzarella, topped with peperonata sauce.",
+    price: "£9.50",
+    course: "Antipasti",
+    tags: ["Vegetarian"],
+  },
+  {
+    name: "Garlic Bread",
+    description: "Two slices of focaccia with garlic, mozzarella, drops of tomato sauce and balsamic vinegar.",
+    price: "£7.50",
+    course: "Antipasti",
+    tags: ["Vegetarian"],
+  },
+  {
+    name: "Grana & Bresaola",
+    description: "Cured beef with Parmesan flakes and baby gem.",
+    price: "£9.50",
+    course: "Antipasti",
+    tags: ["Gluten-Free"],
+  },
+  {
+    name: "Caprese",
+    description: "Fior di latte, fresh tomatoes, basil and pistachio pesto.",
+    price: "£9.00",
+    course: "Antipasti",
+    tags: ["Vegetarian", "Gluten-Free"],
+  },
+  {
+    name: "Garlic Bun",
+    description: "Ciabatta bread filled with garlic butter, mozzarella and herby oil.",
+    price: "£9.00",
+    course: "Antipasti",
+    tags: ["Vegetarian"],
+  },
+  {
+    name: "Burrata e Crudo",
+    description: "Burrata and Parma ham, olive oil and drops of balsamic vinegar.",
+    price: "£9.50",
+    course: "Antipasti",
+  },
+  {
+    name: "Bread or Focaccia",
+    description: "Home-made focaccia or bread served with olive oil and balsamic vinegar.",
+    price: "£5.00",
+    course: "Antipasti",
+    tags: ["Vegan"],
+  },
+
   // ── PASTA ────────────────────────────────────────────────
   {
     name: "Lasagna alla Bolognese",

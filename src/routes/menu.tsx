@@ -28,9 +28,15 @@ import {
   type MenuTab,
 } from "@/data/menu";
 import { assetUrl } from "@/lib/utils";
+import { SITE } from "@/data/site";
 const inkGrapes = assetUrl("/img/ink-grapes.png");
 
-const FOOD_TABS: MenuTab[] = ["Pasta", "Pizza & Desserts", "Secondi & Sides"];
+const FOOD_TABS: MenuTab[] = [
+  "Nibbles & Antipasti",
+  "Pasta",
+  "Secondi & Sides",
+  "Pizza & Desserts",
+];
 
 export const Route = createFileRoute("/menu")({
   component: MenuPage,
@@ -44,14 +50,14 @@ export const Route = createFileRoute("/menu")({
       },
       { property: "og:title", content: "Menu — Pane & Vino" },
       { property: "og:description", content: "Pasta, pizza, secondi, wine and cocktails in Erdington." },
-      { property: "og:url", content: "/menu" },
+      { property: "og:url", content: `${SITE.url}/menu` },
     ],
-    links: [{ rel: "canonical", href: "/menu" }],
+    links: [{ rel: "canonical", href: `${SITE.url}/menu` }],
   }),
 });
 
 function MenuPage() {
-  const [tab, setTab] = useState<MenuTab>("Pasta");
+  const [tab, setTab] = useState<MenuTab>("Nibbles & Antipasti");
   const [diets, setDiets] = useState<DietaryTag[]>([]);
   const panelRef = useRef<HTMLDivElement>(null);
 
@@ -178,7 +184,8 @@ function MenuPage() {
           <div className="mt-12 border-t border-border pt-8">
             <p className="eyebrow">Private dining</p>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              A back room for up to 24 — one long table, its own service, a door that closes.
+              A back room for up to {SITE.privateDining.backRoomCapacity}, plus front dining for
+              {" "}{SITE.privateDining.frontRoomCapacity} guests.
             </p>
             <PrivateDiningDialog className="mt-5 w-full" label="Enquire" />
           </div>

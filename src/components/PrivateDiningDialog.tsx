@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { SITE } from "@/data/site";
 import {
   Dialog,
   DialogContent,
@@ -41,9 +42,9 @@ export function PrivateDiningDialog({
         <DialogHeader>
           <DialogTitle className="font-display text-3xl">Private dining</DialogTitle>
           <DialogDescription className="text-sm text-muted-foreground">
-            Our back room seats 18 around one long table, or 24 across three — with its own
-            service and a door that closes. Tell us about the occasion and we'll reply within
-            24 hours.
+            Our back room seats {SITE.privateDining.backRoomCapacity}, while the front dining
+            area hosts {SITE.privateDining.frontRoomCapacity}. Tell us about the occasion and
+            we'll reply within 24 hours.
           </DialogDescription>
         </DialogHeader>
         <div className="mt-4">

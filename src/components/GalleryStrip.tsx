@@ -74,11 +74,21 @@ function useInfiniteDragScroll() {
   const drag = useRef({ startX: 0, startScroll: 0, moved: false, pointerId: -1 });
   const scrollEndTimer = useRef<number | undefined>(undefined);
 
+  const getSetWidth = (el: HTMLDivElement) => {
+    const copyStart = el.children.length / 3;
+    const first = el.children[0];
+    const secondCopy = Number.isInteger(copyStart) ? el.children[copyStart] : null;
+    if (first instanceof HTMLElement && secondCopy instanceof HTMLElement) {
+      return secondCopy.offsetLeft - first.offsetLeft;
+    }
+    return el.scrollWidth / 3;
+  };
+
   // Start in the middle copy so there's a full set-width of buffer either side.
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
-    el.scrollLeft = el.scrollWidth / 3;
+    el.scrollLeft = getSetWidth(el);
   }, []);
 
   useEffect(() => {
@@ -90,7 +100,7 @@ function useInfiniteDragScroll() {
   const wrap = () => {
     const el = ref.current;
     if (!el) return;
-    const setWidth = el.scrollWidth / 3;
+    const setWidth = getSetWidth(el);
     if (setWidth <= 0) return;
     if (el.scrollLeft < setWidth * 0.5) {
       el.scrollLeft += setWidth;
@@ -168,8 +178,8 @@ export function GalleryStrip() {
           onPointerLeave={drag.onPointerLeave}
           onClickCapture={drag.onClickCapture}
           onScroll={drag.onScroll}
-          className={`flex snap-x snap-mandatory gap-5 overflow-x-auto touch-pan-x overscroll-x-contain px-6 pb-6 select-none [scrollbar-width:none] [will-change:scroll-position] md:gap-8 md:px-16 [&::-webkit-scrollbar]:hidden ${
-            drag.isDragging ? "cursor-grabbing scroll-auto" : "cursor-grab scroll-smooth"
+          className={`flex snap-x snap-proximity gap-5 overflow-x-auto touch-pan-x overscroll-x-contain px-6 pb-6 select-none [scrollbar-width:none] [scroll-behavior:auto] [will-change:scroll-position] md:gap-8 md:px-16 [&::-webkit-scrollbar]:hidden ${
+            drag.isDragging ? "cursor-grabbing" : "cursor-grab"
           }`}
         >
           {STRIP_IMAGES.map((img, i) => (

@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://willg06.github.io/the-gilded-plate/sitemap.xml

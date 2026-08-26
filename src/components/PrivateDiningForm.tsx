@@ -153,7 +153,7 @@ export function PrivateDiningForm() {
         </select>
       </div>
       <DateField id="p-date" name="date" label="Preferred date" />
-      <GuestsField name="guests" min={8} max={40} defaultValue={12} label="Number of guests" />
+      <GuestsField name="guests" min={8} max={35} defaultValue={8} label="Number of guests" />
       <div className="sm:col-span-2">
         <label className={labelClass} htmlFor="p-diet">
           Dietary requirements
