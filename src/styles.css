@@ -126,6 +126,13 @@
 
 
 
+@media (max-width: 1023px) {
+  .site-nav {
+    background-color: var(--paper) !important;
+    background-clip: padding-box;
+  }
+}
+
 /* Film grain overlay (feature 2) */
 .film-grain::after {
   content: "";
