@@ -111,14 +111,14 @@ export function SiteNav() {
             : solid
               ? "border-border bg-paper/95 text-foreground backdrop-blur-md"
               : "border-transparent bg-paper text-foreground"
-          }`}
+          } max-lg:bg-paper max-lg:text-foreground`}
       >
         <span
           aria-hidden
           className="pointer-events-none absolute inset-x-0 top-0 z-0"
           style={{
             height: "env(safe-area-inset-top)",
-            backgroundColor: floating ? "transparent" : "var(--paper)",
+            backgroundColor: "var(--paper)",
           }}
         />
         
