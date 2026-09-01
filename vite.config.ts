@@ -10,6 +10,16 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig(({ command }) => ({
   base: command === "build" ? "/the-gilded-plate/" : "/",
   plugins: [react(), tsconfigPaths(), tailwindcss()],
+  server: {
+    host: "0.0.0.0",
+    port: 5173,
+    strictPort: false,
+  },
+  preview: {
+    host: "0.0.0.0",
+    port: 4173,
+    strictPort: false,
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

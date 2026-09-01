@@ -48,6 +48,7 @@ export function CookieBanner() {
     <div
       role="dialog"
       aria-label="Cookie preferences"
+      style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)" }}
       className="fixed inset-x-0 bottom-0 z-[9997] border-t border-border bg-paper px-6 py-5"
     >
       <div className="mx-auto flex max-w-5xl flex-col gap-4 md:flex-row md:items-center md:justify-between">

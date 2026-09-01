@@ -79,27 +79,63 @@
   }
 
   body {
+    margin: 0;
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     width: 100%;
     max-width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
     overflow-x: clip;
     overscroll-behavior-x: none;
+    -webkit-overflow-scrolling: touch;
   }
 
   html {
     background-color: var(--color-background);
     width: 100%;
     max-width: 100%;
+    min-height: 100%;
     overflow-x: clip;
     overscroll-behavior-x: none;
+    scroll-behavior: smooth;
   }
 
   #root {
     width: 100%;
     max-width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    html,
+    body,
+    #root {
+      min-height: -webkit-fill-available;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: transparent;
+      pointer-events: none;
+      z-index: 2147483647;
+    }
+
+    body::before {
+      top: 0;
+    }
+
+    body::after {
+      bottom: 0;
+    }
   }
 
   h1,
@@ -108,43 +144,6 @@
   h4 {
     font-family: var(--font-display);
     font-weight: 500;
-  }
-}
-
-/* Removed: a mobile-only override here was shifting .site-nav up by
-   `env(safe-area-inset-top)` (negative top) and doubling its top padding
-   to compensate. Because this rule sits outside any @layer, it beats
-   Tailwind's `top-0` / `pt-[env(safe-area-inset-top)]` utilities on the
-   header regardless of source order (unlayered CSS always wins over
-   layered CSS in the cascade). On a sticky/scrolled header that shift
-   pushes the safe-area-covering strip out of sync with the actual notch
-   region, so the page content underneath shows through behind the
-   Dynamic Island. The header's own `top-0` + `pt-[env(safe-area-inset-top)]`
-   (in SiteNav.tsx) plus its always-solid `max-lg:bg-paper` already cover
-   the notch correctly on their own — no extra override needed. */
-
-
-
-
-@media (max-width: 1023px) {
-  html,
-  body {
-    background-color: var(--paper) !important;
-  }
-
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0 0 auto;
-    z-index: 49;
-    height: env(safe-area-inset-top);
-    background-color: var(--paper);
-    pointer-events: none;
-  }
-
-  .site-nav {
-    background-color: var(--paper) !important;
-    background-clip: padding-box;
   }
 }
 

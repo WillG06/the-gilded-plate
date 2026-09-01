@@ -13,8 +13,6 @@ const LINKS = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
-const NAV_HEIGHT = 64; // px — keep the mobile header row and panel offset in sync
-
 const listVariants: Variants = {
   open: { transition: { staggerChildren: 0.06, delayChildren: 0.22 } },
   closed: {},
@@ -103,25 +101,20 @@ export function SiteNav() {
   return (
     <>
       <header
-        className={`site-nav ${overHero ? "fixed" : "sticky"} top-0 right-0 left-0 z-50 isolate border-b pt-[env(safe-area-inset-top)] transition-transform duration-[1200ms] ease-in-out will-change-transform ${headerHidden
+        style={{
+          paddingTop: "max(env(safe-area-inset-top, 0px), 0.5rem)",
+        }}
+        className={`site-nav ${overHero ? "fixed" : "sticky"} top-0 right-0 left-0 z-50 isolate border-b transition-transform duration-[1200ms] ease-in-out will-change-transform ${headerHidden
           ? "lg:pointer-events-none lg:-translate-y-full"
           : "translate-y-0"
         } ${floating
-          ? "border-transparent bg-transparent text-primary-foreground"
+          ? "border-transparent bg-transparent text-primary-foreground max-lg:bg-transparent max-lg:text-primary-foreground"
           : solid
-            ? "border-border bg-paper/95 text-foreground backdrop-blur-md"
+            ? "border-border bg-paper/95 text-foreground backdrop-blur-md max-lg:bg-paper max-lg:text-foreground"
             : "border-transparent bg-paper text-foreground"
-        } max-lg:bg-paper max-lg:text-foreground`}
+        }`}
         data-scrolled={scrolled}
       >
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 z-0"
-          style={{
-            height: "env(safe-area-inset-top)",
-            backgroundColor: "var(--paper)",
-          }}
-        />
         <nav
           aria-label="Primary"
           className="relative z-[60] mx-auto grid min-h-16 max-w-[1600px] grid-cols-[1fr_auto] items-center gap-4 px-5 md:px-10 lg:min-h-[72px] lg:grid-cols-[1fr_auto_1fr]"
@@ -155,7 +148,7 @@ export function SiteNav() {
           <div className="flex shrink-0 items-center gap-2 justify-self-end">
             <Link
               to="/contact"
-              className={`btn btn--arch btn--sm ${floating ? "hidden" : "inline-flex"} ${floating ? "btn--ghost" : "btn--wine"}`}
+              className={`btn btn--arch btn--sm inline-flex ${floating ? "btn--ghost" : "btn--wine"}`}
             >
               <span>Book a table</span>
             </Link>
@@ -207,9 +200,10 @@ export function SiteNav() {
               exit="closed"
               onAnimationComplete={() => setIsAnimating(false)}
               style={{
-                top: `calc(env(safe-area-inset-top) + ${NAV_HEIGHT}px)`,
+                paddingTop: "max(env(safe-area-inset-top, 0px), 0.75rem)",
+                paddingBottom: "max(env(safe-area-inset-bottom, 0px), 0.75rem)",
               }}
-              className="fixed right-0 bottom-0 left-0 z-40 flex flex-col bg-paper pb-[env(safe-area-inset-bottom)] text-foreground [will-change:clip-path] lg:hidden"
+              className="fixed inset-0 z-40 flex flex-col bg-paper text-foreground [will-change:clip-path] lg:hidden"
             >
               <div className="flex flex-1 flex-col overflow-y-auto px-6 pt-4 pb-10 sm:px-10">
                 <div>
