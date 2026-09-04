@@ -248,7 +248,7 @@ export function Hero() {
         className="absolute inset-x-0 z-10 flex flex-col items-center justify-center px-6 text-center text-primary-foreground"
       >
         <p className="font-script text-4xl leading-none opacity-90 md:text-5xl">Little Italy Deli</p>
-        <h1 className="mt-2 font-display text-[15vw] leading-[0.92] tracking-[0.01em] sm:text-[11vw] md:text-[7vw] lg:text-[6rem]">
+        <h1 className="mt-2 font-display text-[13vw] leading-[0.92] tracking-[0.01em] sm:text-[11vw] md:text-[7vw] lg:text-[6rem]">
           Pane &amp; Vino
         </h1>
         <span className="mt-6 block h-px w-16 bg-primary-foreground/40" />
