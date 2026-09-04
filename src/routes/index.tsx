@@ -127,7 +127,7 @@ function Index() {
         ]}
       />
       {/*<InstagramFeed />*/}
-      <NewsletterSignup />
+      {/*<NewsletterSignup />*/}
     </main>
   );
 }
