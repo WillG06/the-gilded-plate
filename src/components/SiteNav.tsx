@@ -291,6 +291,27 @@ export function SiteNav() {
                   >
                     <Phone aria-hidden className="h-4 w-4" /> Contact Us&nbsp; {SITE.phone}
                   </a>
+                  <p className="text-center text-xs text-muted-foreground">
+                    Site by{" "}
+                    <a
+                      href="https://gilevo.co.uk"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline underline-offset-4"
+                    >
+                      Gilevo&amp;Co.
+                    </a>{" "}
+                    <span aria-hidden="true">·</span>{" "}
+                    <a
+                      href="https://instagram.com/gilevo.co"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="Gilevo&Co. on Instagram"
+                      className="underline underline-offset-4"
+                    >
+                      Instagram
+                    </a>
+                  </p>
                 </motion.div>
               </div>
             </motion.div>

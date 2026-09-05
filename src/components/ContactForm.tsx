@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { assetUrl } from "@/lib/utils";
 import { PrivateDiningDialog } from "@/components/PrivateDiningDialog";
+import { SITE } from "@/data/site";
 const inkWine = assetUrl("/img/ink-wine.png");
 
 const field =
@@ -115,6 +116,13 @@ export function ContactForm() {
         </div>
 
         <div className="flex flex-wrap items-center gap-6 sm:col-span-2">
+          <p className="w-full text-sm text-muted-foreground">
+            Email booking is temporarily unavailable. Please call us on{" "}
+            <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="underline underline-offset-4">
+              {SITE.phone}
+            </a>
+            .
+          </p>
           <button
             type="submit"
             disabled={status === "sending"}

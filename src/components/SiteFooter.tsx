@@ -54,6 +54,27 @@ export function SiteFooter() {
       </div>
 
       <p className="mt-10 text-xs text-muted-foreground">© 2026 by Pane &amp; Vino</p>
+      <p className="mt-4 text-xs text-muted-foreground">
+        Website by{" "}
+        <a
+          href="https://gilevo.co.uk"
+          target="_blank"
+          rel="noreferrer"
+          className="underline underline-offset-4"
+        >
+          Gilevo&amp;Co.
+        </a>{" "}
+        <span aria-hidden="true">·</span>{" "}
+        <a
+          href="https://instagram.com/gilevo.co"
+          target="_blank"
+          rel="noreferrer"
+          className="underline underline-offset-4"
+          aria-label="Gilevo&Co. on Instagram"
+        >
+          Instagram
+        </a>
+      </p>
     </footer>
   );
 }
